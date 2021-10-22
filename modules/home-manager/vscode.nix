@@ -6,6 +6,12 @@ let
     version = "1.1.19";
     sha256 = "sha256-haCxXYRAhUI3Kc6YvaarXKBd7/KcCWsd53wuZF7zf2o=";
   };
+  rust-test-explorer = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+    name = "vscode-rust-test-adapter";
+    publisher = "swellaby";
+    version = "0.11.0";
+    sha256 = "sha256-IgfcIRF54JXm9l2vVjf7lFJOVSI0CDgDjQT+Hw6FO4Q=";
+  };
 in
 {
   programs.vscode = {
@@ -23,6 +29,7 @@ in
       matklad.rust-analyzer # Language server
       serayuzgur.crates # Dependency analyzer
       tamasfe.even-better-toml # Improved TOML support
+      rust-test-explorer
       # jscearcy.rust-doc-viewer
       # swellaby.vscode-rust-test-adapter
       vadimcn.vscode-lldb # Debugger
@@ -39,6 +46,7 @@ in
 
       # Editor
       "editor.acceptSuggestionOnEnter" = "off";
+      "editor.autoClosingBrackets" = "always";
       "editor.cursorBlinking" = "smooth";
       "editor.cursorSmoothCaretAnimation" = true;
       "editor.cursorStyle" = "block";
@@ -50,25 +58,27 @@ in
       "editor.formatOnSave" = true;
       "editor.formatOnType" = true;
       "editor.renderFinalNewline" = true;
-      "editor.autoClosingBrackets" = "always";
 
       # Terminal
       "terminal.integrated.fontSize" = 12;
-      # "terminal.fontWeight" = "700";
+      "terminal.integrated.fontWeight" = "700";
 
       # Files
       "files.autoSave" = "afterDelay";
-      "files.trimTrailingWhitespace" = true;
-      "files.trimFinalNewlines" = true;
       "files.insertFinalNewline" = true;
+      "files.trimFinalNewlines" = true;
+      "files.trimTrailingWhitespace" = true;
 
-      # Language
+      # Languages
       ## Nix
       "nix.enableLanguageServer" = true;
 
       # Telemetry
       "telemetry.enableCrashReporter" = false;
       "telemetry.enableTelemetry" = false;
+
+      # Updates
+      "update.mode" = "none"; # Updates are handled by Nix.
     };
   };
 }
