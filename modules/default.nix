@@ -1,0 +1,19 @@
+{ pkgs, ... }: {
+  imports = [ ./pkg.nix ];
+
+  # Use flakes for **maximum hermeticism**.
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = "experimental-features = nix-command flakes";
+  };
+
+  # Allow proprietary packages.
+  nixpkgs.config.allowUnfree = true;
+
+  # Setup `home-manager`.
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.opeik.imports = [ ./home-manager ];
+  };
+}
