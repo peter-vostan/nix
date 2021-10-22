@@ -1,11 +1,22 @@
-{ pkgs, lib, ... }: {
-
+{ pkgs, lib, ... }:
+let
+  monokai-pro = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+    name = "theme-monokai-pro-vscode";
+    publisher = "monokai";
+    version = "1.1.19";
+    sha256 = "sha256-haCxXYRAhUI3Kc6YvaarXKBd7/KcCWsd53wuZF7zf2o=";
+  };
+in
+{
   programs.vscode = {
     enable = true;
 
     extensions = with pkgs.vscode-extensions; [
+      # Theme
+      monokai-pro # The one true theme
+
       # Keybinds
-      vscodevim.vim # Vim
+      vscodevim.vim # The one true layout
 
       # Languages
       ## Rust
@@ -19,14 +30,6 @@
       ## Nix
       jnoortheen.nix-ide
       arrterian.nix-env-selector
-    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      # Theme
-      {
-        name = "theme-monokai-pro-vscode";
-        publisher = "monokai";
-        version = "1.1.19";
-        sha256 = "sha256-haCxXYRAhUI3Kc6YvaarXKBd7/KcCWsd53wuZF7zf2o=";
-      }
     ];
 
     userSettings = {
