@@ -1,9 +1,8 @@
 { pkgs, ... }: {
   fonts.fontconfig.enable = true;
-  packages = with pkgs; [
-    julia-mono
+  home.packages = with pkgs; [
     (nerdfonts.override {
-      fonts = [ "FiraCode" "Meslo" ];
+      fonts = [ "FiraCode" ];
     })
   ];
 }

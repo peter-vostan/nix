@@ -1,6 +1,10 @@
 { ... }: {
   programs = {
-    fish.enable = true;
+    fish = {
+      enable = true;
+      # Disable welcome message.
+      promptInit = "set fish_greeting";
+    };
 
     # Enable the `starship` prompt.
     starship = {

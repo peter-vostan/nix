@@ -1,6 +1,4 @@
 { pkgs, ... }: {
-  imports = [ ./pkg.nix ];
-
   # Use flakes for **maximum hermeticism**.
   nix = {
     package = pkgs.nixFlakes;
@@ -16,4 +14,7 @@
     useUserPackages = true;
     users.opeik.imports = [ ./home-manager ];
   };
+
+  # System-wide packages.
+  environment.systemPackages = with pkgs; [ ];
 }

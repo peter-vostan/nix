@@ -6,6 +6,7 @@
     ./vscode.nix
     ./firefox.nix
     ./font.nix
+    ./mime.nix
   ];
 
   # Enable `home-manager`.
