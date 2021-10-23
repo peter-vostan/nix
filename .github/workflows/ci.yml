@@ -6,7 +6,7 @@ on:
     paths:
       - '**.nix'
       - '**.lock'
-      - '.github'
+      - '.github/**.yml'
 jobs:
   build:
     runs-on: ${{ matrix.os }}
