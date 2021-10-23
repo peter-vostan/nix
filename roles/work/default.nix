@@ -1,5 +1,3 @@
 { ... }: {
-  home-manager = {
-    users.opeik.imports = [ ./home-manager.nix ];
-  };
+  home-manager.users.opeik.imports = [ ./home-manager.nix ];
 }
