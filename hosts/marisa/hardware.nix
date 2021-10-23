@@ -2,7 +2,6 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   # Kernel settings.
-  boot.kernelPackages = pkgs.linuxPackages_5_4;
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
   # Bootloader.

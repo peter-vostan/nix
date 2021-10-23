@@ -3,12 +3,10 @@
     ./desktop.nix
     ./mime.nix
     ./print.nix
-    ./user.nix
-    ./user.nix
   ];
 
   # `nixos` version.
-  system.stateVersion = "21.11";
+  system.stateVersion = "21.05";
   # Automatically optimize the Nix store.
   nix.autoOptimiseStore = true;
   # UTF-8 everywhere!

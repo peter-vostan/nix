@@ -1,6 +1,4 @@
 { pkgs, ... }: {
-  imports = [ ./user.nix ];
-
   # `nix-darwin` verison.
   system.stateVersion = 4;
   # Enable the Nix build daemon.
