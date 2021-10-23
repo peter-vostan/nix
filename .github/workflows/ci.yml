@@ -18,4 +18,4 @@ jobs:
       with:
         name: ${{ github.repository }}
         authToken: ${{ secrets.CACHIX_TOKEN }}
-    - run: nix build .#darwinConfigurations.reimu.system
+    - run: nix build .#marisa
