@@ -18,4 +18,4 @@ jobs:
       with:
         name: opeik
         authToken: ${{ secrets.CACHIX_TOKEN }}
-    - run: nix build .#marisa
+    - run: nix build .#nixosConfigurations.marisa.config.system
