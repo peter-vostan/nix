@@ -1,11 +1,12 @@
 name: ci
+permissions:
+  contents: read
 on:
   push:
     paths:
       - '**.nix'
       - '**.lock'
-permissions:
-  contents: read
+      - '.github'
 jobs:
   build:
     runs-on: ${{ matrix.os }}
