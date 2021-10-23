@@ -18,7 +18,7 @@ The initial structure was inspired by
       grep '/install' |
       cut -d '"' -f 4 |
       xargs curl --silent --location |
-      sh -s -- --darwin-use-unencrypted-nix-store-volume --daemon
+      sh -s -- --daemon --darwin-use-unencrypted-nix-store-volume
    ```
 
 2. Install [nix-darwin](https://github.com/LnL7/nix-darwin)
