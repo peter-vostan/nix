@@ -1,16 +1,17 @@
-{ pkgs, ... }: {
+{ pkgs, lib, config, ... }: {
   imports = [
     ./fish.nix
     ./git.nix
     ./pkg.nix
     ./vscode.nix
-    ./firefox.nix
+    #./firefox.nix
     ./font.nix
-    ./mime.nix
   ];
 
-  # Enable `home-manager`.
-  home.stateVersion = "21.11";
+  home = {
+    stateVersion = "21.05";
+  };
+
   programs = {
     home-manager.enable = true;
   };

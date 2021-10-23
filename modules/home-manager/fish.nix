@@ -16,6 +16,6 @@
     };
 
     # Provide suggestions when a binary isn't found.
-    nix-index.enable = true;
+    # nix-index.enable = true;
   };
 }

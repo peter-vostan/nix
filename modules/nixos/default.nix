@@ -1,7 +1,9 @@
 { pkgs, ... }: {
   imports = [
     ./desktop.nix
+    ./mime.nix
     ./print.nix
+    ./user.nix
     ./user.nix
   ];
 

@@ -1,10 +1,7 @@
-{ pkgs, ... }: {
-  # Define users.
-  users = {
-    users.opeik = {
-      shell = pkgs.fish;
-      isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" ];
-    };
+{ ... }: {
+  users.users.opeik = {
+    home = "/home/opeik";
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
   };
 }

@@ -1,4 +1,6 @@
 { pkgs, ... }: {
+  imports = [ ./user.nix ];
+
   # Use flakes for **maximum hermeticism**.
   nix = {
     package = pkgs.nixFlakes;
@@ -17,4 +19,11 @@
 
   # System-wide packages.
   environment.systemPackages = with pkgs; [ ];
+
+  # Shell integration.
+  programs = {
+    bash.enable = true;
+    zsh.enable = true;
+    fish.enable = true;
+  };
 }
