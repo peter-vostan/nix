@@ -1,18 +1,16 @@
-{ pkgs, lib, ... }:
-let
-  user = {
-    shell = pkgs.fish;
-  };
-  macosUser = {
-    home = "/Users/opeik";
-  };
-  linuxUser = {
-    home = "/home/opeik";
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
-  };
-in
-{
+{ pkgs, lib, ... }: {
   # Define users.
-  users.users.opeik = user // (if pkgs.stdenv.isDarwin then macosUser else linuxUser);
+  users.users.opeik = lib.mkMerge [
+    {
+      shell = pkgs.fish;
+    }
+    (lib.mkIf pkgs.stdenv.isDarwin {
+      home = "/Users/opeik";
+    })
+    (lib.mkIf pkgs.stdenv.isLinux {
+      home = "/home/opeik";
+      isNormalUser = true;
+      extraGroups = [ "wheel" "networkmanager" ];
+    })
+  ];
 }

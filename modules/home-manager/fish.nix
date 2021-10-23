@@ -14,8 +14,5 @@
         hostname.ssh_only = false;
       };
     };
-
-    # Provide suggestions when a binary isn't found.
-    # nix-index.enable = true;
   };
 }

@@ -17,33 +17,32 @@
 
   outputs = inputs@{ self, darwin, home-manager, nixpkgs, nixos-hardware, nur, ... }:
     let
-      baseModules = [ ./modules ];
+      sharedModules = [ ./modules ];
       macosModules = [ home-manager.darwinModules.home-manager ./modules/macos ];
       nixosModules = [ home-manager.nixosModules.home-manager ./modules/nixos ];
-      overlays = [ { nixpkgs.overlays = [ nur.overlay ]; } ];
+      overlays = [{ nixpkgs.overlays = [ nur.overlay ]; }];
+
       # Creates a macOS configuration.
       macosConfig = { system ? "aarch64-darwin", modules }:
         darwin.lib.darwinSystem {
           inherit system;
-          modules = baseModules ++ macosModules ++ modules;
+          modules = sharedModules ++ macosModules ++ modules ++ overlays;
         };
+
+      # Creates a nixOS configuration.
       nixosConfig = { system ? "x86_64-linux", modules }:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = baseModules ++ nixosModules ++ modules ++ overlays;
+          modules = sharedModules ++ nixosModules ++ modules ++ overlays;
         };
     in
     {
       darwinConfigurations = {
-        reimu = macosConfig {
-          modules = [ ./hosts/reimu ./roles/home ];
-        };
+        reimu = macosConfig { modules = [ ./hosts/reimu ./roles/home ]; };
       };
 
       nixosConfigurations = {
-        marisa = nixosConfig {
-          modules = [ ./hosts/marisa ./roles/home ];
-        };
+        marisa = nixosConfig { modules = [ ./hosts/marisa ./roles/home ]; };
       };
     };
 }
