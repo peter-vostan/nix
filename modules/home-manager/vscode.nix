@@ -74,6 +74,7 @@ in
       # Telemetry
       "telemetry.enableCrashReporter" = false;
       "telemetry.enableTelemetry" = false;
+      "githubPullRequests.telemetry.enabled" = false;
 
       # Updates
       "update.mode" = "none";
