@@ -12,10 +12,12 @@ in
     enable = true;
 
     extensions = with pkgs.vscode-extensions; [
-      # Theme
+      # General
       monokai-pro # The one true theme
-      # Keybinds
       vscodevim.vim # The one true layout
+      ms-vscode-remote.remote-ssh # SSH support
+      eamodio.gitlens # Visualize git data
+      github.vscode-pull-request-github # GitHub integration
 
       # Languages
       ## Rust
@@ -25,8 +27,14 @@ in
       vadimcn.vscode-lldb # Debugger
 
       ## Nix
-      jnoortheen.nix-ide
-      arrterian.nix-env-selector
+      jnoortheen.nix-ide # Language server
+      arrterian.nix-env-selector # `nix shell` support
+
+      ## Docker
+      ms-azuretools.vscode-docker # Language support
+
+      ## Markdown
+      yzhang.markdown-all-in-one # Language support
     ];
 
     userSettings = {
