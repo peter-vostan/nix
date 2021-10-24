@@ -1,6 +1,11 @@
 { config, ... }: {
   programs.git = {
     userEmail = "sandro@stikic.com";
+    lfs.enable = true;
+    signing = {
+      key = "E1492413C1CB24EC";
+      signByDefault = true;
+    };
   };
 
   programs.ssh = {
