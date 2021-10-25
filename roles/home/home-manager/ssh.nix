@@ -1,13 +1,4 @@
 { config, ... }: {
-  programs.git = {
-    userEmail = "sandro@stikic.com";
-    signing = {
-      key = "E1492413C1CB24EC";
-      signByDefault = true;
-    };
-    lfs.enable = true;
-  };
-
   programs.ssh = {
     enable = true;
     matchBlocks = {
@@ -22,6 +13,10 @@
       "stikic.com" = {
         hostname = "stikic.com";
         identityFile = "${config.home.homeDirectory}/.ssh/keys/stikic.com";
+      };
+      "marisa.local" = {
+        hostname = "marisa.local";
+        identityFile = "${config.home.homeDirectory}/.ssh/keys/marisa.local";
       };
     };
   };
