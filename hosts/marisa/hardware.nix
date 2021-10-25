@@ -16,7 +16,10 @@
 
   # Graphics hardware.
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    modesetting.enable = true;
+  };
 
   # Filesystems.
   fileSystems = {
