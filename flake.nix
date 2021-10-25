@@ -43,7 +43,7 @@
       };
 
       nixosConfigurations = {
-        marisa = nixosConfig { modules = [ ./hosts/marisa ./roles/home ]; };
+        marisa = nixosConfig { modules = [ ./hosts/marisa ./roles/work ]; };
       };
     };
 }
