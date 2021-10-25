@@ -20,6 +20,11 @@
     package = config.boot.kernelPackages.nvidiaPackages.beta;
     modesetting.enable = true;
     powerManagement.enable = true;
+    # Broken assertion within the nvidia module.
+    # See: https://github.com/NixOS/nixpkgs/issues/139630.
+    prime.offload.enable = true;
+    prime.nvidiaBusId = "PCI:1:00.0";
+    prime.intelBusId = "PCI:0:00.0";
   };
 
   # Filesystems.

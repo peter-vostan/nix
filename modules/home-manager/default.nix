@@ -4,7 +4,6 @@
     ./git.nix
     ./pkg.nix
     ./vscode.nix
-    #./firefox.nix
     ./font.nix
   ];
 
