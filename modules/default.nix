@@ -9,6 +9,8 @@
 
   # Allow proprietary packages.
   nixpkgs.config.allowUnfree = true;
+  # System-wide packages.
+  environment.systemPackages = with pkgs; [ ];
 
   # Setup `home-manager`.
   home-manager = {
@@ -17,10 +19,7 @@
     users.opeik.imports = [ ./home-manager ];
   };
 
-  # System-wide packages.
-  environment.systemPackages = with pkgs; [ ];
-
-  # Shell integration.
+  # Integrate Nix with shells.
   programs = {
     zsh.enable = true;
     fish.enable = true;
