@@ -23,7 +23,7 @@ main() {
     if [[ "$OSTYPE" == "darwin"* ]]; then
         os='macOS'
     elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        os='NixOS'
+        os='nixOS'
     else
         printf "unsupported os"
         exit 1
@@ -33,7 +33,7 @@ main() {
 
     if [[ ${os} == 'macOS' ]]; then
         run sudo darwin-rebuild switch --flake ".#${host}"
-    elif [[ "${os}" == 'NixOS' ]]; then
+    elif [[ "${os}" == 'nixOS' ]]; then
         run sudo nixos-rebuild switch --flake ".#${host}"
     fi
 

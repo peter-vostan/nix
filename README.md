@@ -2,7 +2,7 @@
 
 [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
-This repo contains the nix config which I use on my macOS and NixOS machines.
+This repo contains the nix config which I use on my macOS and nixOS machines.
 The initial structure was inspired by
 [davegallant/nixos-config](https://github.com/davegallant/nix-config).
 

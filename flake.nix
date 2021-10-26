@@ -2,48 +2,64 @@
   description = "opeik's nix configs";
 
   inputs = {
+    # Nix packages.
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixos-hardware.url = "github:nixos/nixos-hardware";
     nur.url = github:nix-community/NUR;
+    # macOS support.
     darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Manages your home directory.
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Provides Rust toolchains.
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, darwin, home-manager, nixpkgs, nixos-hardware, nur, ... }:
+  outputs = inputs@{ self, darwin, home-manager, nixpkgs, nur, fenix, ... }:
     let
-      sharedModules = [ ./modules ];
+      overlays = { nixpkgs.overlays = [ nur.overlay fenix.overlay ]; };
+      sharedModules = [ ./modules overlays ];
       macosModules = [ home-manager.darwinModules.home-manager ./modules/macos ];
       nixosModules = [ home-manager.nixosModules.home-manager ./modules/nixos ];
-      overlays = [{ nixpkgs.overlays = [ nur.overlay ]; }];
 
       # Creates a macOS configuration.
-      macosConfig = { system ? "aarch64-darwin", modules }:
+      macosConfig = { system, modules }:
         darwin.lib.darwinSystem {
           inherit system;
-          modules = sharedModules ++ macosModules ++ modules ++ overlays;
+          modules = sharedModules ++ macosModules ++ modules;
         };
 
       # Creates a nixOS configuration.
-      nixosConfig = { system ? "x86_64-linux", modules }:
+      nixosConfig = { system, modules }:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = sharedModules ++ nixosModules ++ modules ++ overlays;
+          modules = sharedModules ++ nixosModules ++ modules;
         };
     in
     {
       darwinConfigurations = {
-        reimu = macosConfig { modules = [ ./hosts/reimu ./roles/home ]; };
-        reimu-ci = macosConfig { system = "x86_64-darwin"; modules = [ ./hosts/reimu ./roles/home ]; };
+        reimu = macosConfig {
+          system = "aarch64-darwin";
+          modules = [ ./hosts/reimu ./roles/home ];
+        };
+        reimu-ci = macosConfig {
+          system = "x86_64-darwin";
+          modules = [ ./hosts/reimu ./roles/home ];
+        };
       };
 
       nixosConfigurations = {
-        marisa = nixosConfig { modules = [ ./hosts/marisa ./roles/work ]; };
+        marisa = nixosConfig {
+          system = "x86_64-linux";
+          modules = [ ./hosts/marisa ./roles/work ];
+        };
       };
     };
 }

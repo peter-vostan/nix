@@ -12,12 +12,19 @@ in
     enable = true;
 
     extensions = with pkgs.vscode-extensions; [
-      # General
+      # Look and feel
       monokai-pro # The one true theme
       vscodevim.vim # The one true layout
+
+      # Remote
       ms-vscode-remote.remote-ssh # SSH support
-      eamodio.gitlens # Visualize git data
-      github.vscode-pull-request-github # GitHub integration
+
+      # Git
+      eamodio.gitlens # Improved git support
+      github.vscode-pull-request-github # GitHub pull request integration
+
+      # Spelling
+      streetsidesoftware.code-spell-checker # Spell checking
 
       # Languages
       ## Rust
@@ -28,13 +35,9 @@ in
 
       ## Nix
       jnoortheen.nix-ide # Language server
-      arrterian.nix-env-selector # `nix shell` support
 
       ## Docker
       ms-azuretools.vscode-docker # Language support
-
-      ## Markdown
-      yzhang.markdown-all-in-one # Language support
     ];
 
     userSettings = {
@@ -88,6 +91,11 @@ in
       ## Nix
       "nix.enableLanguageServer" = true;
       "[nix]" = { "editor.tabSize" = 2; };
+
+      # Extenions
+      ## Code spell checker
+      "cSpell.allowCompoundWords" = true;
+      "cSpell.spellCheckDelayMs" = 1000;
     };
   };
 }
