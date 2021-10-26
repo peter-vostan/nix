@@ -23,8 +23,5 @@
   programs = {
     zsh.enable = true;
     fish.enable = true;
-    # Being replaced by `nix-index` soon™.
-    # See: https://github.com/NixOS/nixpkgs/issues/39789.
-    command-not-found.enable = false;
   };
 }

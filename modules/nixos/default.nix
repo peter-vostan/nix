@@ -15,4 +15,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
   # Set time zone.
   time.timeZone = "Australia/Perth";
+  # Being replaced by `nix-index` soon™.
+  # See: https://github.com/NixOS/nixpkgs/issues/39789.
+  programs.command-not-found.enable = false;
 }
