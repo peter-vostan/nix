@@ -96,6 +96,8 @@ in
       ## Code spell checker
       "cSpell.allowCompoundWords" = true;
       "cSpell.spellCheckDelayMs" = 1000;
+      ## Git lens
+      "gitlens.codeLens.enabled" = false;
     };
   };
 }
