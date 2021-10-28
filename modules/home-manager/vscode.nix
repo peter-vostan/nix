@@ -66,6 +66,8 @@ in
 
         # Terminal
         "terminal.integrated.fontSize" = 12;
+        "terminal.integrated.allowChords" = false;
+        "terminal.integrated.gpuAcceleration" = "on";
 
         # Files
         "files.autoSave" = "afterDelay";
@@ -99,13 +101,10 @@ in
         ## Git lens
         "gitlens.codeLens.enabled" = false;
       }
-      (lib.mkIf (pkgs.stdenv.isDarwin) {
-        "workbench.fontAliasing" = "auto";
-      })
       (lib.mkIf (pkgs.stdenv.isLinux) {
-        # Electron doesn't support window dectorations under wayland.
+        # Native window decorations don't work yet.
         # See: https://github.com/microsoft/vscode/issues/124202
-        "window.titleBarStyle" = "custom";
+        # "window.titleBarStyle" = "custom";
       })
     ];
   };
