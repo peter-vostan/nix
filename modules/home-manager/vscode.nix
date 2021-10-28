@@ -114,8 +114,8 @@
         "editor.formatOnType" = true;
         "editor.renderFinalNewline" = false;
         "editor.rulers" = [ 80 ];
-        "editor.stickyTabStops" = true;
         "editor.smoothScrolling" = true;
+        "editor.stickyTabStops" = true;
 
         # Terminal
         "terminal.integrated.fontSize" = 12;
@@ -124,15 +124,22 @@
 
         # Files
         "files.autoSave" = "afterDelay";
+        "files.eol" = "\n";
+        "files.exclude" = {
+          "**/.direnv/" = true; # Direnv build artifacts
+          "**/.DS_Store" = true; # macOS Finder directory metadata
+          "**/.git" = true; # Git data
+          "**/result" = true; # Rust build artifacts
+          "**/target" = true; # Nix build output
+        };
         "files.insertFinalNewline" = true;
         "files.trimFinalNewlines" = true;
         "files.trimTrailingWhitespace" = true;
-        "files.eol" = "\n";
 
         # Telemetry
+        "githubPullRequests.telemetry.enabled" = false;
         "telemetry.enableCrashReporter" = false;
         "telemetry.enableTelemetry" = false;
-        "githubPullRequests.telemetry.enabled" = false;
 
         # Updates
         "update.mode" = "none";
