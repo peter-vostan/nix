@@ -137,6 +137,13 @@
         # Updates
         "update.mode" = "none";
 
+        # Spelling
+        "cSpell.allowCompoundWords" = true;
+        "cSpell.spellCheckDelayMs" = 1000;
+
+        # Git
+        "gitlens.codeLens.enabled" = false;
+
         # Languages
         ## Rust
         "crates.listPreReleases" = true;
@@ -145,14 +152,8 @@
 
         ## Nix
         "nix.enableLanguageServer" = true;
+        "nixEnvSelector.nixFile" = "\${workspaceRoot}/shell.nix";
         "[nix]" = { "editor.tabSize" = 2; };
-
-        # Extenions
-        ## Code spell checker
-        "cSpell.allowCompoundWords" = true;
-        "cSpell.spellCheckDelayMs" = 1000;
-        ## Git lens
-        "gitlens.codeLens.enabled" = false;
       }
       (lib.mkIf (pkgs.stdenv.isLinux) {
         # Native window decorations don't work yet.
