@@ -6,4 +6,5 @@
   # Add additional allowed shells. Set using `chsh -s /run/current-system/sw/bin/fish`.
   environment.shells = [ pkgs.fish ];
   # fonts.enableFontDir = true;
+  nix.gc.interval = { Day = 7; };
 }

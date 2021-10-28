@@ -9,8 +9,12 @@
 
   # `nixos` version.
   system.stateVersion = "21.05";
-  # Automatically optimize the Nix store.
-  nix.autoOptimiseStore = true;
+  nix = {
+    # Automatically optimize the Nix store.
+    autoOptimiseStore = true;
+    gc.dates = "weekly";
+  };
+
   # UTF-8 everywhere!
   i18n.defaultLocale = "en_US.UTF-8";
   # Set time zone.

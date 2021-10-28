@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   imports = [ ./user.nix ];
 
   nix = {
@@ -15,7 +15,6 @@
     # Automatically collect garbage.
     gc = {
       automatic = true;
-      dates = "weekly";
       options = "--delete-older-than 30d";
     };
   };
