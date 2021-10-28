@@ -3,7 +3,9 @@
     enable = true;
 
     extensions = with pkgs.vscode-extensions; [
+      # Prefer the packaged version for extensions which require additional binaries.
       vadimcn.vscode-lldb
+      matklad.rust-analyzer
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "gitlens";
