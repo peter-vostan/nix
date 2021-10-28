@@ -26,6 +26,12 @@
         sha256 = "1v3j67j8bydyqba20b2wzsfximjnbhknk260zkc0fid1xzzb2sbn";
       }
       {
+        name = "nix-env-selector";
+        publisher = "arrterian";
+        version = "1.0.7";
+        sha256 = "sha256-DnaIXJ27bcpOrIp1hm7DcrlIzGSjo4RTJ9fD72ukKlc=";
+      }
+      {
         name = "rust-analyzer";
         publisher = "matklad";
         version = "0.2.792";
