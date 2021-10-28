@@ -1,43 +1,92 @@
-{ pkgs, lib, ... }:
-let
-  monokai-pro = pkgs.vscode-utils.extensionFromVscodeMarketplace {
-    name = "theme-monokai-pro-vscode";
-    publisher = "monokai";
-    version = "1.1.19";
-    sha256 = "sha256-haCxXYRAhUI3Kc6YvaarXKBd7/KcCWsd53wuZF7zf2o=";
-  };
-in
-{
+{ pkgs, lib, ... }: {
   programs.vscode = {
     enable = true;
 
-    extensions = with pkgs.vscode-extensions; [
-      # Look and feel
-      monokai-pro # The one true theme
-      vscodevim.vim # The one true layout
-
-      # Remote
-      ms-vscode-remote.remote-ssh # SSH support
-
-      # Git
-      eamodio.gitlens # Improved git support
-      github.vscode-pull-request-github # GitHub pull request integration
-
-      # Spelling
-      streetsidesoftware.code-spell-checker # Spell checking
-
-      # Languages
-      ## Rust
-      matklad.rust-analyzer # Language server
-      serayuzgur.crates # Dependency analyzer
-      tamasfe.even-better-toml # Improved TOML support
-      vadimcn.vscode-lldb # Debugger
-
-      ## Nix
-      jnoortheen.nix-ide # Language server
-
-      ## Docker
-      ms-azuretools.vscode-docker # Language support
+    extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "gitlens";
+        publisher = "eamodio";
+        version = "11.6.1";
+        sha256 = "0nghanaxa5db7lxfi4nly45iaps560zkwsfhmzhiiaan0hj0qmcs";
+      }
+      {
+        name = "vscode-pull-request-github";
+        publisher = "GitHub";
+        version = "0.31.1";
+        sha256 = "17az74in63xy460g8m1wsyj0i4gza6rw42fwi1i0l0afl5a8nc2s";
+      }
+      {
+        name = "nix-ide";
+        publisher = "jnoortheen";
+        version = "0.1.18";
+        sha256 = "1v3j67j8bydyqba20b2wzsfximjnbhknk260zkc0fid1xzzb2sbn";
+      }
+      {
+        name = "rust-analyzer";
+        publisher = "matklad";
+        version = "0.2.792";
+        sha256 = "1m4g6nf5yhfjrjja0x8pfp79v04lxp5lfm6z91y0iilmqbb9kx1q";
+      }
+      {
+        name = "theme-monokai-pro-vscode";
+        publisher = "monokai";
+        version = "1.1.19";
+        sha256 = "0skzydg68bkwwwfnn2cwybpmv82wmfkbv66f54vl51a0hifv3845";
+      }
+      {
+        name = "vscode-docker";
+        publisher = "ms-azuretools";
+        version = "1.17.0";
+        sha256 = "01na7j64mavn2zqfxkly9n6fpr6bs3vyiipy09jkmr5m86fq0cdx";
+      }
+      {
+        name = "remote-ssh";
+        publisher = "ms-vscode-remote";
+        version = "0.65.8";
+        sha256 = "0csi4mj2j00irjaw6vjmyadfbpmxxcx73idlhab6d9y0042mpr0g";
+      }
+      {
+        name = "remote-ssh-edit-nightly";
+        publisher = "ms-vscode-remote";
+        version = "2021.10.36984";
+        sha256 = "07p58wfi75fdicv7r507ify85jq05s6apcn65dd8kn3x0390m6rc";
+      }
+      {
+        name = "remote-ssh-nightly";
+        publisher = "ms-vscode-remote";
+        version = "2021.10.36984";
+        sha256 = "1ck6whn231z6lwg9li1494vsia7nciggg57xzs47awzzlj1ad0k5";
+      }
+      {
+        name = "crates";
+        publisher = "serayuzgur";
+        version = "0.5.10";
+        sha256 = "1dbhd6xbawbnf9p090lpmn8i5gg1f7y8xk2whc9zhg4432kdv3vd";
+      }
+      {
+        name = "code-spell-checker";
+        publisher = "streetsidesoftware";
+        version = "2.0.10";
+        sha256 = "05jgq7yci2c09msz3bbbdfjkh61jx7ga3sjpb5hh7wgzp9pfi8yn";
+      }
+      {
+        name = "even-better-toml";
+        publisher = "tamasfe";
+        version = "0.14.2";
+        sha256 = "17djwa2bnjfga21nvyz8wwmgnjllr4a7nvrsqvzm02hzlpwaskcl";
+      }
+      {
+        name = "vscode-lldb";
+        publisher = "vadimcn";
+        version = "1.6.8";
+        sha256 = "1c81hs2lbcxshw3fnpajc9hzkpykc76a6hgs7wl5xji57782bckl";
+      }
+      {
+        name = "vim";
+        publisher = "vscodevim";
+        version = "1.21.10";
+        sha256 = "0c9m7mc2kmfzj3hkwq3d4hj43qha8a75q5r1rdf1xfx8wi5hhb1n";
+      }
     ];
 
     userSettings = lib.mkMerge [
