@@ -16,7 +16,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.opeik.imports = [ ./home-manager ];
+    users.opeik.imports = [ ../home ];
   };
 
   # Integrate Nix with shells.

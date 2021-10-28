@@ -47,18 +47,18 @@
       darwinConfigurations = {
         reimu = macosConfig {
           system = "aarch64-darwin";
-          modules = [ ./hosts/reimu ./roles/home ];
+          modules = [ ./hosts/reimu ./profiles/personal ];
         };
         reimu-ci = macosConfig {
           system = "x86_64-darwin";
-          modules = [ ./hosts/reimu ./roles/home ];
+          modules = [ ./hosts/reimu ./profiles/personal ];
         };
       };
 
       nixosConfigurations = {
         marisa = nixosConfig {
           system = "x86_64-linux";
-          modules = [ ./hosts/marisa ./roles/work ];
+          modules = [ ./hosts/marisa ./profiles/work ];
         };
       };
     };
