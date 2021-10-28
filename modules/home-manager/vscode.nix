@@ -2,7 +2,9 @@
   programs.vscode = {
     enable = true;
 
-    extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    extensions = with pkgs.vscode-extensions; [
+      vadimcn.vscode-lldb
+    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "gitlens";
         publisher = "eamodio";
@@ -74,12 +76,6 @@
         publisher = "tamasfe";
         version = "0.14.2";
         sha256 = "17djwa2bnjfga21nvyz8wwmgnjllr4a7nvrsqvzm02hzlpwaskcl";
-      }
-      {
-        name = "vscode-lldb";
-        publisher = "vadimcn";
-        version = "1.6.8";
-        sha256 = "1c81hs2lbcxshw3fnpajc9hzkpykc76a6hgs7wl5xji57782bckl";
       }
       {
         name = "vim";

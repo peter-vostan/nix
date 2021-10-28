@@ -4,6 +4,10 @@
     userName = "Sandro Stikić";
     ignores = [ ".DS_Store" ];
     extraConfig = {
+      branch = {
+        autosetupmerge = "always";
+        autosetuprebase = "always";
+      };
       core = {
         autocrlf = false;
         editor = "code --wait";
