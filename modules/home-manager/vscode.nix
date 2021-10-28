@@ -40,64 +40,73 @@ in
       ms-azuretools.vscode-docker # Language support
     ];
 
-    userSettings = {
-      # Workbench
-      "workbench.colorTheme" = "Monokai Pro";
-      "workbench.iconTheme" = "Monokai Pro Icons";
-      "workbench.fontAliasing" = "auto";
+    userSettings = lib.mkMerge [
+      {
+        # Workbench
+        "workbench.colorTheme" = "Monokai Pro";
+        "workbench.iconTheme" = "Monokai Pro Icons";
 
-      # Editor
-      "editor.acceptSuggestionOnEnter" = "off";
-      "editor.autoClosingBrackets" = "always";
-      "editor.cursorBlinking" = "smooth";
-      "editor.cursorSmoothCaretAnimation" = true;
-      "editor.cursorStyle" = "block";
-      "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
-      "editor.fontLigatures" = true;
-      "editor.fontSize" = 14;
-      "editor.fontWeight" = "700";
-      "editor.formatOnPaste" = true;
-      "editor.formatOnSave" = true;
-      "editor.formatOnType" = true;
-      "editor.renderFinalNewline" = false;
-      "editor.rulers" = [ 80 ];
-      "editor.stickyTabStops" = true;
-      "editor.smoothScrolling" = true;
+        # Editor
+        "editor.acceptSuggestionOnEnter" = "off";
+        "editor.autoClosingBrackets" = "always";
+        "editor.cursorBlinking" = "smooth";
+        "editor.cursorSmoothCaretAnimation" = true;
+        "editor.cursorStyle" = "block";
+        "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
+        "editor.fontLigatures" = true;
+        "editor.fontSize" = 14;
+        "editor.fontWeight" = "700";
+        "editor.formatOnPaste" = true;
+        "editor.formatOnSave" = true;
+        "editor.formatOnType" = true;
+        "editor.renderFinalNewline" = false;
+        "editor.rulers" = [ 80 ];
+        "editor.stickyTabStops" = true;
+        "editor.smoothScrolling" = true;
 
-      # Terminal
-      "terminal.integrated.fontSize" = 12;
+        # Terminal
+        "terminal.integrated.fontSize" = 12;
 
-      # Files
-      "files.autoSave" = "afterDelay";
-      "files.insertFinalNewline" = true;
-      "files.trimFinalNewlines" = true;
-      "files.trimTrailingWhitespace" = true;
-      "files.eol" = "\n";
+        # Files
+        "files.autoSave" = "afterDelay";
+        "files.insertFinalNewline" = true;
+        "files.trimFinalNewlines" = true;
+        "files.trimTrailingWhitespace" = true;
+        "files.eol" = "\n";
 
-      # Telemetry
-      "telemetry.enableCrashReporter" = false;
-      "telemetry.enableTelemetry" = false;
-      "githubPullRequests.telemetry.enabled" = false;
+        # Telemetry
+        "telemetry.enableCrashReporter" = false;
+        "telemetry.enableTelemetry" = false;
+        "githubPullRequests.telemetry.enabled" = false;
 
-      # Updates
-      "update.mode" = "none";
+        # Updates
+        "update.mode" = "none";
 
-      # Languages
-      ## Rust
-      "crates.listPreReleases" = true;
-      "rust-analyzer.completion.postfix.enable" = false;
-      "rust-analyzer.experimental.procAttrMacros" = true;
+        # Languages
+        ## Rust
+        "crates.listPreReleases" = true;
+        "rust-analyzer.completion.postfix.enable" = false;
+        "rust-analyzer.experimental.procAttrMacros" = true;
 
-      ## Nix
-      "nix.enableLanguageServer" = true;
-      "[nix]" = { "editor.tabSize" = 2; };
+        ## Nix
+        "nix.enableLanguageServer" = true;
+        "[nix]" = { "editor.tabSize" = 2; };
 
-      # Extenions
-      ## Code spell checker
-      "cSpell.allowCompoundWords" = true;
-      "cSpell.spellCheckDelayMs" = 1000;
-      ## Git lens
-      "gitlens.codeLens.enabled" = false;
-    };
+        # Extenions
+        ## Code spell checker
+        "cSpell.allowCompoundWords" = true;
+        "cSpell.spellCheckDelayMs" = 1000;
+        ## Git lens
+        "gitlens.codeLens.enabled" = false;
+      }
+      (lib.mkIf (pkgs.stdenv.isDarwin) {
+        "workbench.fontAliasing" = "auto";
+      })
+      (lib.mkIf (pkgs.stdenv.isLinux) {
+        # Electron doesn't support window dectorations under wayland.
+        # See: https://github.com/microsoft/vscode/issues/124202
+        "window.titleBarStyle" = "custom";
+      })
+    ];
   };
 }
