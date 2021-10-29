@@ -7,7 +7,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
       # Uses more disk space but speeds up nix-direnv.
-      keep-keep-derivations = true
+      keep-derivations = true
       keep-outputs = true
       # Trigger garbage collection when <= 1GB is free.
       min-free = ${toString (1000 * 1000 * 1000)}
