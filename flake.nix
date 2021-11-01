@@ -21,7 +21,7 @@
     };
   };
 
-  outputs = { self, nix, nixos, darwin, home, nur, fenix, ... }@inputs:
+  outputs = { self, nix, nixos, darwin, home, nur, fenix, ... }:
     let
       overlays = { nixpkgs.overlays = [ nix.overlay nur.overlay fenix.overlay ]; };
       sharedModules = [ ./modules overlays ];
