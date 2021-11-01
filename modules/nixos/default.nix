@@ -3,8 +3,7 @@
     ./desktop.nix
     ./docker.nix
     ./mdns.nix
-    ./mime.nix
-    ./print.nix
+    ./printer.nix
   ];
 
   # `nixos` version.

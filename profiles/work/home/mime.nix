@@ -1,6 +1,6 @@
 { ... }: {
   xdg.mime.enable = true;
-  xdg.mime.defaultApplications = {
+  xdg.mimeApps.defaultApplications = {
     # Set `firefox` as the default web browser.
     "text/html" = [ "firefox.desktop" ];
     "text/xml" = [ "firefox.desktop" ];

@@ -1,16 +1,14 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, system, ... }: {
   imports = [ ./user.nix ];
 
   nix = {
     # Use flakes for **maximum hermeticism**.
-    package = pkgs.nixFlakes;
+    package = pkgs.nix;
     extraOptions = ''
       experimental-features = nix-command flakes
       # Uses more disk space but speeds up nix-direnv.
       keep-derivations = true
       keep-outputs = true
-      # Trigger garbage collection when <= 1GB is free.
-      min-free = ${toString (1000 * 1000 * 1000)}
     '';
     # Automatically collect garbage.
     gc = {
@@ -31,7 +29,7 @@
     users.opeik.imports = [ ../home ];
   };
 
-  # Integrate Nix with shells.
+  # Integrate with shells.
   programs = {
     zsh.enable = true;
     fish.enable = true;

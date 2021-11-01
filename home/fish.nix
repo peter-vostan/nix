@@ -3,8 +3,7 @@
     fish = {
       enable = true;
       # Disable welcome message.
-      promptInit = "set fish_greeting";
-      interactiveShellInit = "fish_vi_key_bindings";
+      interactiveShellInit = "set fish_greeting; fish_vi_key_bindings";
     };
 
     # Enable the `starship` prompt.
@@ -13,7 +12,7 @@
       enableFishIntegration = true;
     };
 
-    # Enables per-directory run command files.
+    # Enables per-directory run-command files.
     direnv = {
       enable = true;
       enableFishIntegration = true;

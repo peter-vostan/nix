@@ -1,7 +1,8 @@
 { ... }: {
   imports = [
-    ./git.nix
     ./firefox.nix
+    ./git.nix
+    ./mime.nix
     ./ssh.nix
   ];
 }
