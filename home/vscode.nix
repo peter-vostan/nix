@@ -56,18 +56,6 @@
         sha256 = "0csi4mj2j00irjaw6vjmyadfbpmxxcx73idlhab6d9y0042mpr0g";
       }
       {
-        name = "remote-ssh-edit-nightly";
-        publisher = "ms-vscode-remote";
-        version = "2021.10.36984";
-        sha256 = "07p58wfi75fdicv7r507ify85jq05s6apcn65dd8kn3x0390m6rc";
-      }
-      {
-        name = "remote-ssh-nightly";
-        publisher = "ms-vscode-remote";
-        version = "2021.10.36984";
-        sha256 = "1ck6whn231z6lwg9li1494vsia7nciggg57xzs47awzzlj1ad0k5";
-      }
-      {
         name = "crates";
         publisher = "serayuzgur";
         version = "0.5.10";
