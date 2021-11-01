@@ -124,6 +124,12 @@
         "files.trimFinalNewlines" = true;
         "files.trimTrailingWhitespace" = true;
 
+        # Remote SSH
+        "remote.SSH.useLocalServer" = false;
+        "remote.SSH.remotePlatform" = {
+          "marisa.local" = "linux";
+        };
+
         # Telemetry
         "githubPullRequests.telemetry.enabled" = false;
         "telemetry.enableCrashReporter" = false;
