@@ -25,7 +25,6 @@ let
   macosPackages = with pkgs; [ ];
   nixosPackages = with pkgs; [
     _1password-gui # Password manager
-    # gnomeExtensions.dash-to-dock # Makes gnome *usable*
   ];
 in
 {

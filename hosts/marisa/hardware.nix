@@ -15,15 +15,15 @@
   powerManagement.cpuFreqGovernor = "ondemand";
 
   # Graphics hardware.
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;
-    # powerManagement.enable = true;
-    # Broken assertion within the nvidia module.
-    # See: https://github.com/NixOS/nixpkgs/issues/139630.
-    # prime.offload.enable = true;
-    # prime.nvidiaBusId = "PCI:1:00.0";
-    # prime.intelBusId = "PCI:0:00.0";
+    powerManagement.enable = true;
+    prime = {
+      offload.enable = true;
+      nvidiaBusId = "PCI:0:2:0";
+      intelBusId = "PCI:1:0:0";
+    };
   };
 
   # Filesystems.

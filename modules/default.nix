@@ -20,7 +20,9 @@
   # Allow proprietary packages.
   nixpkgs.config.allowUnfree = true;
   # System-wide packages.
-  environment.systemPackages = with pkgs; [ ];
+  environment.systemPackages = with pkgs; [
+    unstable.gnomeExtensions.dash-to-dock # Makes gnome *usable*
+  ];
 
   # Setup `home-manager`.
   home-manager = {

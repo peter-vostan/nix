@@ -4,6 +4,7 @@
   inputs = {
     nix.url = "github:nixos/nix";
     nixos.url = "github:nixos/nixpkgs/nixos-21.05";
+    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # macOS support.
     darwin = {
       url = "github:lnl7/nix-darwin";
@@ -21,7 +22,7 @@
     };
   };
 
-  outputs = { self, nix, nixos, darwin, home, nur, fenix, ... }:
+  outputs = { self, nix, nixos, nixos-unstable, darwin, home, nur, fenix, ... }:
     let
       overlays = { nixpkgs.overlays = [ nix.overlay nur.overlay fenix.overlay ]; };
       sharedModules = [ ./modules overlays ];
@@ -30,9 +31,15 @@
 
       # Creates a nixOS system.
       nixosSystem = { system, modules }:
+        let
+          nixos-unstable-overlay = final: prev: {
+            unstable = nixos-unstable.legacyPackages.${system};
+          };
+          extraOverlays = [{ nixpkgs.overlays = [ nixos-unstable-overlay ]; }];
+        in
         nixos.lib.nixosSystem {
           inherit system;
-          modules = sharedModules ++ nixosModules ++ modules;
+          modules = sharedModules ++ nixosModules ++ modules ++ extraOverlays;
         };
 
       # Creates a macOS system.
