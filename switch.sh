@@ -32,7 +32,7 @@ main() {
     printf "> switching $(green ${os}) configuration for host $(green ${host})\n"
 
     if [[ ${os} == 'macOS' ]]; then
-        run sudo darwin-rebuild switch --flake ".#${host}"
+        run sudo darwin-rebuild switch --flake ".#${host}" -L
     elif [[ "${os}" == 'nixOS' ]]; then
         run sudo nixos-rebuild switch --flake ".#${host}"
     fi

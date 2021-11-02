@@ -2,7 +2,6 @@
   description = "opeik's nix configs";
 
   inputs = {
-    nix.url = "github:nixos/nix/2.4-maintenance";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # macOS support.
     macos = {
@@ -28,7 +27,7 @@
 
   outputs = { self, nix, nixpkgs, macos, home, nur, fenix, ... }:
     let
-      overlays = { nixpkgs.overlays = [ nix.overlay nur.overlay fenix.overlay ]; };
+      overlays = { nixpkgs.overlays = [ nur.overlay fenix.overlay ]; };
       sharedModules = [ ./modules overlays ];
       macosModules = [ home.darwinModules.home-manager ./modules/macos ];
       nixosModules = [ home.nixosModules.home-manager ./modules/nixos ];
