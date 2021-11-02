@@ -6,8 +6,13 @@
     nixos.url = "github:nixos/nixpkgs/nixos-21.05";
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # macOS support.
-    darwin = {
+    macos = {
       url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixos";
+    };
+    # Nix user repo.
+    nur = {
+      url = github:nix-community/NUR;
       inputs.nixpkgs.follows = "nixos";
     };
     # Manages your home directory.
@@ -22,7 +27,7 @@
     };
   };
 
-  outputs = { self, nix, nixos, nixos-unstable, darwin, home, nur, fenix, ... }:
+  outputs = { self, nix, nixos, nixos-unstable, macos, home, nur, fenix, ... }:
     let
       overlays = { nixpkgs.overlays = [ nix.overlay nur.overlay fenix.overlay ]; };
       sharedModules = [ ./modules overlays ];
@@ -33,7 +38,10 @@
       nixosSystem = { system, modules }:
         let
           nixos-unstable-overlay = final: prev: {
-            unstable = nixos-unstable.legacyPackages.${system};
+            unstable = import nixos-unstable {
+              inherit system;
+              config.allowUnfree = true;
+            };
           };
           extraOverlays = [{ nixpkgs.overlays = [ nixos-unstable-overlay ]; }];
         in
@@ -44,7 +52,7 @@
 
       # Creates a macOS system.
       macosSystem = { system, modules }:
-        darwin.lib.darwinSystem {
+        macos.lib.darwinSystem {
           inherit system;
           modules = sharedModules ++ macosModules ++ modules;
         };

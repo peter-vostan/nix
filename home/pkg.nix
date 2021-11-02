@@ -24,7 +24,7 @@ let
   ];
   macosPackages = with pkgs; [ ];
   nixosPackages = with pkgs; [
-    _1password-gui # Password manager
+    unstable._1password-gui # Password manager
   ];
 in
 {
