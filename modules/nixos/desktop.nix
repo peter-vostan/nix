@@ -9,6 +9,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    unstable.gnomeExtensions.dash-to-dock # Makes gnome *usable*
+    gnomeExtensions.dash-to-dock # Makes gnome *usable*
   ];
 }

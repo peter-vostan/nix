@@ -31,7 +31,6 @@
 
   # Integrate with shells.
   programs = {
-    zsh.enable = true;
     fish.enable = true;
   };
 }

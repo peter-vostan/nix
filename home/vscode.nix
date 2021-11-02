@@ -4,8 +4,8 @@
 
     extensions = with pkgs.vscode-extensions; [
       # Prefer the packaged version for extensions which require additional binaries.
-      vadimcn.vscode-lldb
-      matklad.rust-analyzer
+      # vadimcn.vscode-lldb
+      pkgs.fenix.rust-analyzer-vscode-extension
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "gitlens";

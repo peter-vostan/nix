@@ -13,6 +13,7 @@ let
     combine [
       stable.defaultToolchain
       (stable.withComponents [ "rust-src" ])
+      rust-analyzer
     ]) # Rust stable toolchain and source code.
 
     ## Nix
@@ -24,7 +25,7 @@ let
   ];
   macosPackages = with pkgs; [ ];
   nixosPackages = with pkgs; [
-    unstable._1password-gui # Password manager
+    _1password-gui # Password manager
   ];
 in
 {

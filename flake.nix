@@ -3,31 +3,30 @@
 
   inputs = {
     nix.url = "github:nixos/nix/2.4-maintenance";
-    nixos.url = "github:nixos/nixpkgs/nixos-21.05";
-    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # macOS support.
     macos = {
       url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # Nix user repo.
     nur = {
       url = github:nix-community/NUR;
-      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # Manages your home directory.
     home = {
-      url = "github:nix-community/home-manager/release-21.05";
-      inputs.nixpkgs.follows = "nixos";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # Provides Rust toolchains.
     fenix = {
       url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nix, nixos, nixos-unstable, macos, home, nur, fenix, ... }:
+  outputs = { self, nix, nixpkgs, macos, home, nur, fenix, ... }:
     let
       overlays = { nixpkgs.overlays = [ nix.overlay nur.overlay fenix.overlay ]; };
       sharedModules = [ ./modules overlays ];
@@ -36,18 +35,9 @@
 
       # Creates a nixOS system.
       nixosSystem = { system, modules }:
-        let
-          nixos-unstable-overlay = final: prev: {
-            unstable = import nixos-unstable {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          };
-          extraOverlays = [{ nixpkgs.overlays = [ nixos-unstable-overlay ]; }];
-        in
-        nixos.lib.nixosSystem {
+        nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = sharedModules ++ nixosModules ++ modules ++ extraOverlays;
+          modules = sharedModules ++ nixosModules ++ modules;
         };
 
       # Creates a macOS system.
@@ -55,6 +45,7 @@
         macos.lib.darwinSystem {
           inherit system;
           modules = sharedModules ++ macosModules ++ modules;
+          specialArgs = { inherit fenix; };
         };
     in
     {
