@@ -2,7 +2,7 @@
   description = "opeik's nix configs";
 
   inputs = {
-    nix.url = "github:nixos/nix";
+    nix.url = "github:nixos/nix/2.4-maintenance";
     nixos.url = "github:nixos/nixpkgs/nixos-21.05";
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # macOS support.

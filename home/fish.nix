@@ -10,6 +10,12 @@
     starship = {
       enable = true;
       enableFishIntegration = true;
+      settings = {
+        nix_shell = {
+          symbol = "⛄ ";
+          format = ''via [$symbol$state( $name)]($style) '';
+        };
+      };
     };
 
     # Enables per-directory run-command files.
