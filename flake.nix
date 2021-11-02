@@ -2,30 +2,30 @@
   description = "opeik's nix configs";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixos.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # macOS support.
     macos = {
       url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # Nix user repo.
-    nur = {
-      url = github:nix-community/NUR;
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixos";
     };
     # Manages your home directory.
     home = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixos";
+    };
+    # Nix user repo.
+    nur = {
+      url = github:nix-community/NUR;
+      inputs.nixpkgs.follows = "nixos";
     };
     # Provides Rust toolchains.
     fenix = {
       url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixos";
     };
   };
 
-  outputs = { self, nix, nixpkgs, macos, home, nur, fenix, ... }:
+  outputs = { self, nixos, macos, home, nur, fenix, ... }:
     let
       overlays = { nixpkgs.overlays = [ nur.overlay fenix.overlay ]; };
       sharedModules = [ ./modules overlays ];
@@ -34,7 +34,7 @@
 
       # Creates a nixOS system.
       nixosSystem = { system, modules }:
-        nixpkgs.lib.nixosSystem {
+        nixos.lib.nixosSystem {
           inherit system;
           modules = sharedModules ++ nixosModules ++ modules;
         };
@@ -44,7 +44,6 @@
         macos.lib.darwinSystem {
           inherit system;
           modules = sharedModules ++ macosModules ++ modules;
-          specialArgs = { inherit fenix; };
         };
     in
     {
