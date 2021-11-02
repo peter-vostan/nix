@@ -27,6 +27,6 @@ jobs:
         name: opeik
         authToken: ${{ secrets.CACHIX_TOKEN }}
     - if: matrix.os == 'macos-latest'
-      run: nix build .#darwinConfigurations.reimu-ci.system
+      run: nix build -L .#darwinConfigurations.reimu-ci.system
     - if: matrix.os == 'ubuntu-latest'
-      run: nix build .#nixosConfigurations.marisa.config.system.build.toplevel
+      run: nix build -L .#nixosConfigurations.marisa.config.system.build.toplevel
