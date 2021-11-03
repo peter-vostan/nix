@@ -1,5 +1,5 @@
 # Dell Precision 7550.
-# In the BIOS, disable Video > Switchable graphics
+# In the BIOS, enable "Video > Switchable Graphics".
 { ... }: {
   imports = [ ./hardware.nix ];
 

@@ -2,43 +2,42 @@
   description = "opeik's nix configs";
 
   inputs = {
-    # Nix packages.
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nur.url = github:nix-community/NUR;
-    # macOS support.
-    darwin = {
+    nixos.url = "github:nixos/nixpkgs/nixos-unstable";
+    macos = {
       url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixos";
     };
-    # Manages your home directory.
-    home-manager = {
+    home = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixos";
     };
-    # Provides Rust toolchains.
+    nur = {
+      url = github:nix-community/NUR;
+      inputs.nixpkgs.follows = "nixos";
+    };
     fenix = {
       url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixos";
     };
   };
 
-  outputs = inputs@{ self, darwin, home-manager, nixpkgs, nur, fenix, ... }:
+  outputs = inputs@{ self, nixos, macos, home, nur, fenix, ... }:
     let
       overlays = { nixpkgs.overlays = [ nur.overlay fenix.overlay ]; };
       sharedModules = [ ./modules overlays ];
-      macosModules = [ home-manager.darwinModules.home-manager ./modules/macos ];
-      nixosModules = [ home-manager.nixosModules.home-manager ./modules/nixos ];
+      macosModules = [ home.darwinModules.home-manager ./modules/macos ];
+      nixosModules = [ home.nixosModules.home-manager ./modules/nixos ];
 
       # Creates a macOS configuration.
       macosConfig = { system, modules }:
-        darwin.lib.darwinSystem {
+        macos.lib.darwinSystem {
           inherit system;
           modules = sharedModules ++ macosModules ++ modules;
         };
 
       # Creates a nixOS configuration.
       nixosConfig = { system, modules }:
-        nixpkgs.lib.nixosSystem {
+        nixos.lib.nixosSystem {
           inherit system;
           modules = sharedModules ++ nixosModules ++ modules;
         };
