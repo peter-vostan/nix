@@ -3,6 +3,7 @@
 
   inputs = {
     nixos.url = "github:nixos/nixpkgs/nixos-unstable";
+    nix.url = "github:nixos/nix/2.4";
     macos = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixos";
@@ -21,9 +22,9 @@
     };
   };
 
-  outputs = inputs@{ self, nixos, macos, home, nur, fenix, ... }:
+  outputs = { self, nix, nixos, macos, home, nur, fenix, ... }:
     let
-      overlays = { nixpkgs.overlays = [ nur.overlay fenix.overlay ]; };
+      overlays = { nixpkgs.overlays = [ nix.overlay nur.overlay fenix.overlay ]; };
       sharedModules = [ ./modules overlays ];
       macosModules = [ home.darwinModules.home-manager ./modules/macos ];
       nixosModules = [ home.nixosModules.home-manager ./modules/nixos ];
