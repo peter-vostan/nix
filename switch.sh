@@ -1,12 +1,6 @@
 #!/bin/sh
 set -euo pipefail
 
-# Terminal style control codes.
-GREEN='\033[1;32m'
-CLEAR='\033[0m'
-
-host="${1-$(hostname)}"
-
 # Print a command prior to execution.
 run() {
     CMD="${@}"
@@ -16,28 +10,27 @@ run() {
 
 # What if it was ~~purple~~ green.
 green() {
+    # Terminal style control codes.
+    GREEN='\033[1;32m'
+    CLEAR='\033[0m'
     printf "${GREEN}${1}${CLEAR}"
 }
 
 main() {
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        os='macOS'
-    elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        os='nixOS'
-    else
+    case "$OSTYPE" in
+    "darwin"*)
+        run sudo darwin-rebuild switch --flake ".#${host}"
+        ;;
+    "linux-gnu"*)
+        run sudo nixos-rebuild switch --flake ".#${host}"
+        ;;
+    *)
         printf "unsupported os"
         exit 1
-    fi
-
-    printf "> switching $(green ${os}) configuration for host $(green ${host})\n"
-
-    if [[ ${os} == 'macOS' ]]; then
-        run sudo darwin-rebuild switch --flake ".#${host}" -L
-    elif [[ "${os}" == 'nixOS' ]]; then
-        run sudo nixos-rebuild switch --flake ".#${host}"
-    fi
-
+        ;;
+    esac
     printf "> switch ok 🎉 \n"
 }
 
+host="${1-$(hostname)}"
 main

@@ -1,12 +1,18 @@
 { pkgs, lib, ... }: {
   programs.vscode = {
     enable = true;
-
     extensions = with pkgs.vscode-extensions; [
       # Prefer the packaged version for extensions which require additional binaries.
       vadimcn.vscode-lldb
       matklad.rust-analyzer
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      # To fetch new extension versions, run `./fetch-vscode-ext`.
+      {
+        name = "shell-format";
+        publisher = "foxundermoon";
+        version = "7.1.1";
+        sha256 = "Vp+w/b2jpzS0F9lkPKrakpJiUbxjjlYMecyrl0I6OK0=";
+      }
       {
         name = "gitlens";
         publisher = "eamodio";
@@ -155,6 +161,9 @@
         "nix.enableLanguageServer" = true;
         "nixEnvSelector.nixFile" = "\${workspaceRoot}/shell.nix";
         "[nix]" = { "editor.tabSize" = 2; };
+
+        ## Shell
+        "shellformat.path" = "${pkgs.shfmt}/bin/shfmt";
       }
       (lib.mkIf (pkgs.stdenv.isLinux) {
         # Native window decorations don't work yet.
