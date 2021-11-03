@@ -2,8 +2,8 @@
   description = "opeik's nix configs";
 
   inputs = {
-    nixos.url = "github:nixos/nixpkgs/nixos-unstable";
     nix.url = "github:nixos/nix/2.4";
+    nixos.url = "github:nixos/nixpkgs/nixos-unstable";
     macos = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixos";
