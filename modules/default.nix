@@ -3,7 +3,7 @@
 
   nix = {
     # Use flakes for **maximum hermeticism**.
-    package = pkgs.nixUnstable;
+    package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
       # Uses more disk space but speeds up nix-direnv.
