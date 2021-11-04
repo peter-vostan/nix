@@ -150,6 +150,7 @@
 
         # Git
         "gitlens.codeLens.enabled" = false;
+        "gitlens.currentLine.enabled" = false;
 
         # Languages
         ## Rust
