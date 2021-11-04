@@ -11,7 +11,6 @@
   nix = {
     # Automatically optimize the Nix store.
     autoOptimiseStore = true;
-    gc.dates = "weekly";
   };
 
   # UTF-8 everywhere!

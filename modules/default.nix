@@ -10,11 +10,6 @@
       keep-derivations = true
       keep-outputs = true
     '';
-    # Automatically collect garbage.
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 30d";
-    };
   };
 
   # Allow proprietary packages.
