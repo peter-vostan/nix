@@ -157,6 +157,7 @@
         "crates.listPreReleases" = true;
         "rust-analyzer.completion.postfix.enable" = false;
         "rust-analyzer.experimental.procAttrMacros" = true;
+        "rust-analyzer.checkOnSave.command" = "clippy";
 
         ## Nix
         "nix.enableLanguageServer" = true;
