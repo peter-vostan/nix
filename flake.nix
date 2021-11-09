@@ -26,8 +26,14 @@
     let
       overlays = { nixpkgs.overlays = [ nix.overlay nur.overlay fenix.overlay ]; };
       sharedModules = [ ./modules overlays ];
-      macosModules = [ home.darwinModules.home-manager ./modules/macos ];
-      nixosModules = [ home.nixosModules.home-manager ./modules/nixos ];
+      nixosModules = [ ./modules/nixos home.nixosModules.home-manager ];
+      macosModules = [
+        ./modules/macos
+        home.darwinModules.home-manager
+        {
+          home-manager.sharedModules = [ ./home/copy-apps.nix ];
+        }
+      ];
 
       # Creates a macOS configuration.
       macosConfig = { system, modules }:
