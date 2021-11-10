@@ -4,7 +4,6 @@ let
     # Dev tools
     git # Version control
     vim # Command line text editor
-    gnupg # Commit signing
     docker-compose # Container orchestration for Docker.
 
     # Languages
