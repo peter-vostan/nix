@@ -29,12 +29,16 @@
   # Filesystems.
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-label/nixos";
+      device = "/dev/disk/by-label/root";
       fsType = "ext4";
     };
-    "/boot" = {
-      device = "/dev/disk/by-label/boot";
-      fsType = "vfat";
+  };
+
+  boot.initrd.luks.devices = {
+    root = {
+      device = "/dev/nvme0n1p2";
+      preLVM = true;
+      allowDiscards = true;
     };
   };
 
