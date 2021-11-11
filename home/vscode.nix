@@ -85,6 +85,12 @@
         version = "1.21.10";
         sha256 = "0c9m7mc2kmfzj3hkwq3d4hj43qha8a75q5r1rdf1xfx8wi5hhb1n";
       }
+      {
+        name = "errorlens";
+        publisher = "usernamehw";
+        version = "3.4.0";
+        sha256 = "qBqQGv0BmTFK/y8hprplCVr5aZr3z9jM5a2Eu6CfOfU=";
+      }
     ];
 
     userSettings = lib.mkMerge [
