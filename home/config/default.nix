@@ -12,12 +12,14 @@
   home.packages = with pkgs; [
     git
     htop
-    (google-chrome.override {
-      commandLineArgs = [
-        "--enable-features=UseOzonePlatform"
-        "--ozone-platform=wayland"
-      ];
-    })
+    google-chrome
+    # Keeps crashing if I enable ozone wayland...
+    # (google-chrome.override {
+    #   commandLineArgs = [
+    #     "--enable-features=UseOzonePlatform"
+    #     "--ozone-platform=wayland"
+    #   ];
+    # })
     rnix-lsp # Nix language server
     teams # ms-teams
   ];
