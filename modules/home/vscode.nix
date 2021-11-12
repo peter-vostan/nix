@@ -80,12 +80,6 @@
         sha256 = "17djwa2bnjfga21nvyz8wwmgnjllr4a7nvrsqvzm02hzlpwaskcl";
       }
       {
-        name = "vim";
-        publisher = "vscodevim";
-        version = "1.21.10";
-        sha256 = "0c9m7mc2kmfzj3hkwq3d4hj43qha8a75q5r1rdf1xfx8wi5hhb1n";
-      }
-      {
         name = "errorlens";
         publisher = "usernamehw";
         version = "3.4.0";
