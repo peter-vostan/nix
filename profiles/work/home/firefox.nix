@@ -6,7 +6,7 @@
       ublock-origin
       onepassword-password-manager
     ];
-    profiles.opeik.settings = {
+    profiles.peter.settings = {
       # Restore last session on startup.
       "browser.startup.page" = 3;
     };

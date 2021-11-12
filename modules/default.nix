@@ -21,7 +21,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.opeik.imports = [ ../home ];
+    users.peter.imports = [ ./home ];
   };
 
   # Integrate with shells.

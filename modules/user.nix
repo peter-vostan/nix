@@ -1,14 +1,14 @@
 { pkgs, lib, ... }: {
   # Define users.
-  users.users.opeik = lib.mkMerge [
+  users.users.peter = lib.mkMerge [
     {
       shell = pkgs.fish;
     }
     (lib.mkIf pkgs.stdenv.isDarwin {
-      home = "/Users/opeik";
+      home = "/Users/peter";
     })
     (lib.mkIf pkgs.stdenv.isLinux {
-      home = "/home/opeik";
+      home = "/home/peter";
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" "docker" ];
     })

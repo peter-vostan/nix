@@ -1,3 +1,3 @@
 { ... }: {
-  home-manager.users.opeik.imports = [ ./home ];
+  home-manager.users.peter.imports = [ ./home ];
 }

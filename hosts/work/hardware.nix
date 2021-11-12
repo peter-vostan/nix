@@ -15,17 +15,8 @@
   powerManagement.cpuFreqGovernor = "ondemand";
 
   # Graphics hardware.
-  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    prime = {
-      offload.enable = true;
-      nvidiaBusId = "PCI:0:2:0";
-      intelBusId = "PCI:1:0:0";
-    };
-  };
-
+  services.xserver.videoDrivers = [ "intel" ];
+  
   # Filesystems.
   fileSystems = {
     "/" = {

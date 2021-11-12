@@ -1,13 +1,9 @@
 {
-  description = "opeik's nix configs";
+  description = "peter's nix configs";
 
   inputs = {
     nix.url = "github:nixos/nix/2.4";
     nixos.url = "github:nixos/nixpkgs/nixos-unstable";
-    macos = {
-      url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixos";
-    };
     home = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixos";
@@ -22,25 +18,11 @@
     };
   };
 
-  outputs = { self, nix, nixos, macos, home, nur, fenix, ... }:
+  outputs = { self, nix, nixos, home, nur, fenix, ... }:
     let
       overlays = { nixpkgs.overlays = [ nix.overlay nur.overlay fenix.overlay ]; };
       sharedModules = [ ./modules overlays ];
       nixosModules = [ ./modules/nixos home.nixosModules.home-manager ];
-      macosModules = [
-        ./modules/macos
-        home.darwinModules.home-manager
-        {
-          home-manager.sharedModules = [ ./home/copy-apps.nix ];
-        }
-      ];
-
-      # Creates a macOS configuration.
-      macosConfig = { system, modules }:
-        macos.lib.darwinSystem {
-          inherit system;
-          modules = sharedModules ++ macosModules ++ modules;
-        };
 
       # Creates a nixOS configuration.
       nixosConfig = { system, modules }:
@@ -50,21 +32,10 @@
         };
     in
     {
-      darwinConfigurations = {
-        reimu = macosConfig {
-          system = "aarch64-darwin";
-          modules = [ ./hosts/reimu ./profiles/personal ];
-        };
-        reimu-ci = macosConfig {
-          system = "x86_64-darwin";
-          modules = [ ./hosts/reimu ./profiles/personal ];
-        };
-      };
-
       nixosConfigurations = {
-        marisa = nixosConfig {
+        work = nixosConfig {
           system = "x86_64-linux";
-          modules = [ ./hosts/marisa ./profiles/work ];
+          modules = [ ./hosts/work ./profiles/work ];
         };
       };
     };

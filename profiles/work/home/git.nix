@@ -1,5 +1,6 @@
 { ... }: {
   programs.git = {
-    userEmail = "s.stikic@fugro.com";
+    userEmail = "p.vostan@fugro.com";
+    # userEmail = "peter.vostan@gmail.com";
   };
 }
