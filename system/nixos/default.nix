@@ -1,5 +1,22 @@
 { pkgs, lib, system, ... }: {
-  imports = [ ./user.nix ];
+  imports = [
+    ./desktop.nix
+    ./docker.nix
+    ./mdns.nix
+    ./printer.nix
+    ./users.nix
+  ];
+
+  # `nixos` version.
+  system.stateVersion = "21.05";
+  nix = { autoOptimiseStore = true; };
+
+  i18n.defaultLocale = "en_US.UTF-8";
+  time.timeZone = "Australia/Perth";
+
+  # Being replaced by `nix-index` soon™.
+  # See: https://github.com/NixOS/nixpkgs/issues/39789.
+  programs.command-not-found.enable = false;
 
   nix = {
     # Use flakes for **maximum hermeticism**.
@@ -16,13 +33,6 @@
   nixpkgs.config.allowUnfree = true;
   # System-wide packages.
   environment.systemPackages = with pkgs; [ ];
-
-  # Setup `home-manager`.
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users.peter.imports = [ ./home ];
-  };
 
   # Integrate with shells.
   programs = {

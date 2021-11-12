@@ -3,7 +3,7 @@
   imports = [ ./hardware.nix ];
 
   # Set hostname.
-  networking.hostName = "work";
+  # networking.hostName = "";
 
   # Setup network interfaces.
   networking.interfaces.eno2.useDHCP = true;

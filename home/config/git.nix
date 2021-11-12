@@ -1,7 +1,8 @@
 { ... }: {
   programs.git = {
     enable = true;
-    userName = "Sandro Stikić";
+    userName = "Peter Vostan";
+    userEmail = "p.vostan@fugro.com";
     ignores = [ ".DS_Store" ];
     extraConfig = {
       branch = {

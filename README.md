@@ -7,6 +7,8 @@ The initial inspired / copied from
 
 [opeik/nix](https://github.com/opeik/nix).
 
+[DylanRJohnston/nixos](https://github.com/DylanRJohnston/nixos)
+
 [davegallant/nixos-config](https://github.com/davegallant/nix-config).
 
 ## nixOS
