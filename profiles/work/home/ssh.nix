@@ -4,7 +4,11 @@
     matchBlocks = {
       "github.com" = {
         hostname = "github.com";
-        identityFile = "${config.home.homeDirectory}/.ssh/keys/github.com";
+        identityFile = "${config.home.homeDirectory}/.ssh/github.com";
+      };
+      "fugro.github.com" = {
+        hostname = "github.com";
+        identityFile = "${config.home.homeDirectory}/.ssh/fugro.github.com";
       };
     };
   };

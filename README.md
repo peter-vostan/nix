@@ -25,7 +25,7 @@ root user remove password
 ### Build / Switch
 
    ```sh
-   nixos-rebuild switch --flake .#work
+   sudo nixos-rebuild switch --flake .#work
    ```
 
 ## Update
