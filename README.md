@@ -79,3 +79,9 @@ Search what others have done in;
 https://github.com/NixOS/nixpkgs
 
 https://search.nixos.org/packages
+
+## Templates
+
+```sh
+cp -r ~/dev/nix/templates/rust-dev/. .
+```
