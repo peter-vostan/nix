@@ -13,14 +13,6 @@
     git
     htop
     google-chrome
-    # Keeps crashing if I enable ozone wayland...
-    # (google-chrome.override {
-    #   commandLineArgs = [
-    #     "--enable-features=UseOzonePlatform"
-    #     "--ozone-platform=wayland"
-    #   ];
-    # })
     rnix-lsp # Nix language server
-    teams # ms-teams
   ];
 }
