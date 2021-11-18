@@ -5,6 +5,7 @@
     ./mdns.nix
     ./printer.nix
     ./users.nix
+    ./cachix.nix
   ];
 
   # `nixos` version.

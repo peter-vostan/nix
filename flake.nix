@@ -12,9 +12,13 @@
       url = github:nix-community/NUR;
       inputs.nixpkgs.follows = "nixos";
     };
+    cachix = {
+      url = "github:jonascarpay/declarative-cachix";
+      inputs.nixpkgs.follows = "nixos";
+    };
   };
 
-  outputs = { self, nix, nixos, home, nur, ... }: {
+  outputs = { self, nix, nixos, home, nur, cachix, ... }: {
     nixosConfigurations.work = nixos.lib.nixosSystem
       {
         system = "x86_64-linux";
@@ -24,6 +28,7 @@
           ./home
           ./hosts/work
           ./system/nixos
+          cachix.nixosModules.declarative-cachix
         ];
       };
   };

@@ -11,12 +11,12 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
 
-  # Power management.
-  powerManagement.cpuFreqGovernor = "ondemand";
-
   # Graphics hardware.
-  services.xserver.videoDrivers = [ "intel" ];
-  
+  services.xserver.videoDrivers = [ "modesetting" ];
+  services.xserver.useGlamor = true;
+  hardware.nvidiaOptimus.disable = true;
+  boot.blacklistedKernelModules = [ "nouveau" "nvidia" ];
+
   # Filesystems.
   fileSystems = {
     "/" = {

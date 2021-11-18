@@ -94,4 +94,6 @@ xrandr
 
 # Example for the Fugro meeting rooms
 xrandr --output DP-3 --mode 1920x1080 --rate 60
+
+# Also look at autorandr
 ```
