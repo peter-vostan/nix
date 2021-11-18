@@ -1,15 +1,10 @@
-
 # Shim for legacy `nix-shell` support.
 (import
   (
-    let
-      lock = builtins.fromJSON (builtins.readFile ./flake.lock);
-    in
     fetchTarball {
-      url = "https://github.com/edolstra/flake-compat/archive/${lock.nodes.flake-compat.locked.rev}.tar.gz";
-      sha256 = lock.nodes.flake-compat.locked.narHash;
+      # Using this pr-1 so that subflakes are supported (ie. referencing a flake via a relative path)
+      url = "https://github.com/BBBSnowball/flake-compat/archive/pr-1.tar.gz";
+      sha256 = "195gqcw5zaxi9rcngylzwhjdafk9pb7db8l2a2nyhdac7dsvxpv9";
     }
   )
-  {
-    src = ./.;
-  }).shellNix
+  { src = ./.; }).shellNix
