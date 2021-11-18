@@ -20,7 +20,7 @@
         channel = fenix.packages.${system}.${rust.channel};
         toolchain = channel.withComponents [ "cargo" "rustc" "rust-src" "rustfmt" ];
       in
-      rec {
+      {
         # `nix develop`
         devShell = with pkgs; mkShell ({
           buildInputs = [
