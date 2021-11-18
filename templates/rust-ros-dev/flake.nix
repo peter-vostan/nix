@@ -1,19 +1,12 @@
 {
   inputs = {
-    # Nix package repository.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-21.05";
     # Rust toolchain packages.
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Flake utility functions.
     flake-utils.url = "github:numtide/flake-utils";
-    # Flake backwards compatability shims for legacy Nix.
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
     # Ros overlay for ROS packages
     ros-overlay = {
       url = "github:lopsided98/nix-ros-overlay";
@@ -21,13 +14,10 @@
     };
   };
 
-  outputs = { self, nixpkgs, fenix, flake-utils, flake-compat, ros-overlay }:
+  outputs = { self, nixpkgs, fenix, flake-utils, ros-overlay }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        rust = {
-          # Desired Rust channel to use, either: "stable", "beta", or "latest" (nightly).
-          channel = "stable";
-        };
+        rustchannel = "stable";
         pkgs = import nixpkgs {
           inherit system;
           overlays = [ ros-overlay.overlay ];

@@ -4,7 +4,7 @@
       enable = true;
       # Add setiing for theme variant dark mode
       # Disable welcome message.
-      interactiveShellInit = "set fish_greeting; fish_vi_key_bindings";
+      interactiveShellInit = "set fish_greeting";
     };
 
     # Enable the `starship` prompt.

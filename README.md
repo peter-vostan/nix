@@ -85,3 +85,13 @@ https://search.nixos.org/packages
 ```sh
 cp -r ~/dev/nix/templates/rust-dev/. .
 ```
+
+## External Displays
+
+```sh
+# To see what displays are connected
+xrandr 
+
+# Example for the Fugro meeting rooms
+xrandr --output DP-3 --mode 1920x1080 --rate 60
+```
