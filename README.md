@@ -80,6 +80,12 @@ https://github.com/NixOS/nixpkgs
 
 https://search.nixos.org/packages
 
+## Git
+
+Git user.email is not set globally to force it to be set explicitly in each repo (to separate work and personal)
+
+git config user.email "peter.vostan@gmail.com"
+
 ## Templates
 
 ```sh

@@ -2,7 +2,8 @@
   programs.git = {
     enable = true;
     userName = "Peter Vostan";
-    userEmail = "p.vostan@fugro.com";
+    # Removed from global config to force it to be set explicitly in each repo (to separate work and personal)
+    # userEmail = "p.vostan@fugro.com";
     ignores = [ ".DS_Store" ];
     extraConfig = {
       branch = {
