@@ -12,6 +12,7 @@
   home.packages = with pkgs; [
     git
     htop
+    lsof
     google-chrome
     rnix-lsp # Nix language server
   ];
