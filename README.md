@@ -58,9 +58,9 @@ passwd -d root
 
 ### Build / Switch
 
-   ```sh
-   sudo nixos-rebuild switch --flake .#work
-   ```
+```sh
+sudo nixos-rebuild switch --flake .#work
+```
 
 ## Update
 
@@ -102,4 +102,12 @@ xrandr
 xrandr --output DP-3 --mode 1920x1080 --rate 60
 
 # Also look at autorandr
+```
+
+## Tailscale
+
+```
+sudo tailscale up --accept-routes
+# If authentication link is prompted, navigate to the link and signin with Microsoft
+tailscale status
 ```

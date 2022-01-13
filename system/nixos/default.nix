@@ -1,11 +1,12 @@
 { pkgs, lib, system, ... }: {
   imports = [
+    ./cachix.nix
     ./desktop.nix
     ./docker.nix
     ./mdns.nix
     ./printer.nix
+    ./tailscale.nix
     ./users.nix
-    ./cachix.nix
   ];
 
   # `nixos` version.

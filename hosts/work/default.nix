@@ -9,6 +9,9 @@
   networking.interfaces.eno2.useDHCP = true;
   networking.interfaces.wlo1.useDHCP = true;
 
+  networking.firewall.allowedTCPPorts = [ ];
+  networking.firewall.allowedUDPPorts = [ 9000 ];
+
   # Enable SSH server.
   services.openssh = {
     enable = true;
