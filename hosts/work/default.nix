@@ -10,7 +10,7 @@
   networking.interfaces.wlo1.useDHCP = true;
 
   networking.firewall.allowedTCPPorts = [ ];
-  networking.firewall.allowedUDPPorts = [ 9000 ];
+  networking.firewall.allowedUDPPorts = [ 9000 14550 ];
 
   # Enable SSH server.
   services.openssh = {
