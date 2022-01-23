@@ -84,7 +84,7 @@ https://search.nixos.org/packages
 
 Git user.email is not set globally to force it to be set explicitly in each repo (to separate work and personal)
 
-git config user.email "peter.vostan@gmail.com"
+git config user.email "email@email.com"
 
 ## Templates
 
@@ -108,6 +108,5 @@ xrandr --output DP-3 --mode 1920x1080 --rate 60
 
 ```
 sudo tailscale up --accept-routes
-# If authentication link is prompted, navigate to the link and signin with Microsoft
 tailscale status
 ```
