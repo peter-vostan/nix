@@ -3,6 +3,6 @@
     shell = pkgs.fish;
     home = "/home/peter";
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" "dialout" ];
+    extraGroups = [ "wheel" "networkmanager" "dialout" ];
   };
 }

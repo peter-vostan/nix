@@ -2,12 +2,12 @@
   imports = [
     ./cachix.nix
     ./desktop.nix
-    ./docker.nix
     # ./nomad.nix
     ./mdns.nix
     ./printer.nix
     ./tailscale.nix
     ./users.nix
+    ./virtualisation.nix
   ];
 
   # `nixos` version.
