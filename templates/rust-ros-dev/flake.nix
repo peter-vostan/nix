@@ -46,6 +46,7 @@
         # armv7l-pkgs = import nixpkgs { inherit system; crossSystem = { system = "armv7l-linux"; }; };
         # aarch64-pkgs = import nixpkgs { inherit system; crossSystem = { system = "aarch64-linux"; }; };
       in
+      rec
       {
         # `nix build`
         defaultPackage = packages.default;
