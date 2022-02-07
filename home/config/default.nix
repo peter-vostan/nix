@@ -13,7 +13,7 @@
     git
     htop
     lsof
-    google-chrome
+    chromium
     rnix-lsp # Nix language server
   ];
 }

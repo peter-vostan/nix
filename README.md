@@ -79,7 +79,9 @@ passwd -d root
 ## Build / Switch
 
 ```sh
-sudo nixos-rebuild switch --flake .#work
+sudo nixos-rebuild switch --flake .#work-dell
+# OR
+darwin-rebuild switch --flake .#work-mac
 ```
 
 ## Update
@@ -96,7 +98,9 @@ If there are updates, they should be reflected in [flake.lock](./flake.lock).
 
 Git user.email is not set globally to force it to be set explicitly in each repo (to separate work and personal)
 
+```sh
 git config user.email "email@email.com"
+```
 
 ## Templates
 
