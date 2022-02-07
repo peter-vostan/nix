@@ -10,6 +10,8 @@
     ./virtualisation.nix
   ];
 
+  nix.autoOptimiseStore = true;
+
   # `nixos` version.
   system.stateVersion = "21.11";
 

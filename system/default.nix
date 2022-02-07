@@ -6,7 +6,6 @@
 
   nix = {
     package = pkgs.nix_2_4; # Needed for flake support
-    autoOptimiseStore = true;
     extraOptions = ''
       experimental-features = nix-command flakes
       # Uses more disk space but speeds up nix-direnv.
