@@ -11,8 +11,7 @@
   ];
 
   # `nixos` version.
-  system.stateVersion = "21.05";
-  nix = { autoOptimiseStore = true; };
+  system.stateVersion = "21.11";
 
   i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "Australia/Perth";
@@ -22,8 +21,8 @@
   programs.command-not-found.enable = false;
 
   nix = {
-    # Use flakes for **maximum hermeticism**.
-    package = pkgs.nix;
+    package = pkgs.nix_2_4; # Needed for flake support
+    autoOptimiseStore = true;
     extraOptions = ''
       experimental-features = nix-command flakes
       # Uses more disk space but speeds up nix-direnv.

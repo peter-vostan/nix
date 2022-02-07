@@ -2,7 +2,7 @@
 
 [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
-This repo contains the nixOS machine configurations.
+This repo contains the nixOS and macOS machine configurations.
 The initial inspired / copied from
 
 [opeik/nix](https://github.com/opeik/nix).
@@ -10,6 +10,26 @@ The initial inspired / copied from
 [DylanRJohnston/nixos](https://github.com/DylanRJohnston/nixos)
 
 [davegallant/nixos-config](https://github.com/davegallant/nix-config).
+
+## macOS
+
+### Install
+
+Install Nix unstable
+```
+curl -s https://api.github.com/repos/numtide/nix-unstable-installer/releases/latest |
+   grep 'browser_download_url' |
+   grep '/install' |
+   cut -d '"' -f 4 |
+   xargs curl --silent --location |
+   sh -s -- --daemon --darwin-use-unencrypted-nix-store-volume
+```
+
+Install nix-darwin
+```
+nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer && \
+./result/bin/darwin-installer
+```
 
 ## nixOS
 
@@ -56,7 +76,7 @@ Remove root user password once you in gnome
 passwd -d root
 ```
 
-### Build / Switch
+## Build / Switch
 
 ```sh
 sudo nixos-rebuild switch --flake .#work
@@ -71,14 +91,6 @@ nix flake update
 ```
 
 If there are updates, they should be reflected in [flake.lock](./flake.lock).
-
-## Debugging
-
-Search what others have done in;
-
-https://github.com/NixOS/nixpkgs
-
-https://search.nixos.org/packages
 
 ## Git
 

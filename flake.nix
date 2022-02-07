@@ -2,34 +2,56 @@
   description = "peter's nix configs";
 
   inputs = {
-    nix.url = "github:nixos/nix/2.4";
-    nixos.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-21.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs-channels/nixos-unstable";
+    macos = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nur = {
       url = github:nix-community/NUR;
-      inputs.nixpkgs.follows = "nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    cachix = {
-      url = "github:jonascarpay/declarative-cachix";
-      inputs.nixpkgs.follows = "nixos";
-    };
+    cachix.url = "github:jonascarpay/declarative-cachix";
   };
 
-  outputs = { self, nix, nixos, home, nur, cachix, ... }: {
-    nixosConfigurations.work = nixos.lib.nixosSystem
-      {
+  outputs = { self, nixpkgs, nixpkgs-unstable, macos, home, nur, cachix, ... }:
+    let
+      # Understand this??
+      unstable = final: prev: {
+        unstable = nixpkgs-unstable.legacyPackages.${prev.system};
+      };
+      overlays = { nixpkgs.overlays = [ unstable nur.overlay ]; };
+    in
+    {
+      nixosConfigurations.work-dell = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          { nixpkgs.overlays = [ nix.overlay nur.overlay ]; }
+          overlays
+          cachix.nixosModules.declarative-cachix
+
           home.nixosModules.home-manager
           ./home
-          ./hosts/work
+          ./hosts/work-dell
           ./system/nixos
-          cachix.nixosModules.declarative-cachix
         ];
       };
-  };
+
+      darwinConfigurations.work-mac = macos.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+          overlays
+          cachix.nixosModules.declarative-cachix
+
+          home.darwinModules.home-manager
+          ./home
+          # ./hosts/work-mac
+          ./system/macos
+        ];
+      };
+    };
 }
