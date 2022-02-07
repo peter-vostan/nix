@@ -11,4 +11,6 @@
   services.nix-daemon.enable = true;
   # Add additional allowed shells. Set using `chsh -s /run/current-system/sw/bin/fish`.
   environment.shells = [ pkgs.fish ];
+  # Enable zsh otherwise things break.
+  programs.zsh.enable = true;
 }
