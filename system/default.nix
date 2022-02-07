@@ -1,7 +1,6 @@
 { pkgs, lib, system, ... }: {
   imports = [
     ./cachix.nix
-    ./users.nix
   ];
 
   nix = {
@@ -19,8 +18,14 @@
   # System-wide packages.
   environment.systemPackages = with pkgs; [ ];
 
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+  };
+
   # Integrate with shells.
   programs = {
+    zsh.enable = true;
     fish.enable = true;
   };
 }

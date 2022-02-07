@@ -7,6 +7,7 @@
     ./mdns.nix
     ./printer.nix
     ./tailscale.nix
+    ./users.nix
     ./virtualisation.nix
   ];
 
@@ -17,6 +18,8 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "Australia/Perth";
+
+  environment.systemPackages = with pkgs; [ chromium ];
 
   # Being replaced by `nix-index` soon™.
   # See: https://github.com/NixOS/nixpkgs/issues/39789.

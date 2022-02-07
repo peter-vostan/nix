@@ -35,7 +35,6 @@
           cachix.nixosModules.declarative-cachix
 
           home.nixosModules.home-manager
-          ./home
           ./hosts/work-dell
           ./system/nixos
         ];
@@ -48,8 +47,6 @@
           cachix.nixosModules.declarative-cachix
 
           home.darwinModules.home-manager
-          ./home
-          # ./hosts/work-mac
           ./system/macos
         ];
       };

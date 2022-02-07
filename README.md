@@ -16,7 +16,7 @@ The initial inspired / copied from
 ### Install
 
 Install Nix unstable
-```
+```sh
 curl -s https://api.github.com/repos/numtide/nix-unstable-installer/releases/latest |
    grep 'browser_download_url' |
    grep '/install' |
@@ -26,10 +26,34 @@ curl -s https://api.github.com/repos/numtide/nix-unstable-installer/releases/lat
 ```
 
 Install nix-darwin
-```
+```sh
 nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer && \
 ./result/bin/darwin-installer
 ```
+
+Enable flakes
+```sh
+nix-env -iA nixpkgs.nix_2_4
+mkdir -p ~/.config/nix
+echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
+```
+
+Bootstrap build
+```sh
+nix build ".#darwinConfigurations.$host.system"
+./result/sw/bin/darwin-rebuild switch --flake .#work-mac
+
+# The followig might need to be run to resolve errors with these existing files
+sudo rm /etc/nix/nix.conf
+sudo rm /etc/shells
+```
+
+Update default shell
+```sh
+chsh -s /run/current-system/sw/bin/fish
+```
+
+Add `auth sufficient pam_tid.so` to `/etc/pam.d/sudo` in order to use touch id for sudo
 
 ## nixOS
 

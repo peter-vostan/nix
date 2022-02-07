@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ../default.nix
+    ./users.nix
   ];
 
   # macOS (`nix-darwin`) verison.
