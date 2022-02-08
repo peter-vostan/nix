@@ -21,10 +21,6 @@
         "editor.autoClosingBrackets" = "always";
         "editor.cursorBlinking" = "smooth";
         "editor.cursorSmoothCaretAnimation" = true;
-        "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
-        "editor.fontLigatures" = true;
-        "editor.fontSize" = 14;
-        "editor.fontWeight" = "700";
         "editor.formatOnPaste" = true;
         "editor.formatOnSave" = true;
         "editor.formatOnType" = true;
