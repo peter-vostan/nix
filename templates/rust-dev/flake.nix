@@ -22,11 +22,16 @@
         rust = {
           pkgs = fenix.packages.${system};
           channel = rust.pkgs.stable;
-          toolchain = rust.pkgs.combine [
-            rust.channel.toolchain
-            # rust.pkgs.targets.aarch64-unknown-linux-gnu.stable.rust-std
-            # rust.pkgs.targets.armv7-unknown-linux-gnueabihf.stable.rust-std
-          ];
+          toolchain = rust.pkgs.combine (with pkgs;
+            [
+              rust.channel.toolchain
+              # rust.pkgs.targets.aarch64-unknown-linux-gnu.stable.rust-std
+              # rust.pkgs.targets.armv7-unknown-linux-gnueabihf.stable.rust-std
+            ] ++ lib.optionals stdenv.isDarwin [
+              darwin.apple_sdk.frameworks.Security
+              libiconv
+            ]
+          );
           dev = rust.pkgs.combine [
             rust.toolchain
             rust.channel.rust-src
