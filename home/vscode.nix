@@ -12,6 +12,7 @@
       arrterian.nix-env-selector
       jnoortheen.nix-ide
       tamasfe.even-better-toml
+      matklad.rust-analyzer
     ];
 
     userSettings = lib.mkMerge [
