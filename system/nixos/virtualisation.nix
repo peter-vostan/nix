@@ -1,16 +1,14 @@
 { ... }: {
   virtualisation.docker.enable = true;
-  users.extraGroups.docker.members = [ "peter" ];
 
   # virtualisation.podman.enable = true;
   # virtualisation.podman.dockerCompat = true; # Create a `docker` alias for podman, to use it as a drop-in replacement
 
+  # Remember to add user to groups qemu-libvirtd and libvirtd
   # virtualisation.libvirtd.enable = true;
   # boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
-  # users.extraGroups.qemu-libvirtd.members = [ "peter" ];
-  # users.extraGroups.libvirtd.members = [ "peter" ];
 
+  # Remember to add user to group vboxusers
   # virtualisation.virtualbox.host.enable = true;
   # virtualisation.virtualbox.host.enableExtensionPack = true;
-  # users.extraGroups.vboxusers.members = [ "peter" ];
 }

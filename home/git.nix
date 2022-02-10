@@ -1,9 +1,9 @@
 { ... }: {
   programs.git = {
     enable = true;
-    userName = "Peter Vostan";
-    # Removed from global config to force it to be set explicitly in each repo (to separate work and personal)
-    # userEmail = "p.vostan@fugro.com";
+    # Configure userName and userEmail at a higher level for configurability
+    # userName = "";
+    # userEmail = "";
     ignores = [ ".DS_Store" ];
     extraConfig = {
       branch = {

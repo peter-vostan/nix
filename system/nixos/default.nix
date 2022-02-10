@@ -7,7 +7,6 @@
     ./mdns.nix
     ./printer.nix
     ./tailscale.nix
-    ./users.nix
     ./virtualisation.nix
   ];
 

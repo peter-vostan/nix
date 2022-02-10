@@ -4,7 +4,6 @@
 
   imports = [
     ../default.nix
-    ./users.nix
     ./pam.nix # pam.enableSudoTouchIdAuth = true;
   ];
 

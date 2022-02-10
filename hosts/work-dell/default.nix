@@ -18,8 +18,4 @@
     permitRootLogin = "no";
     passwordAuthentication = false;
   };
-
-  # users.users.peter.openssh.authorizedKeys.keys = [
-  #   "ssh-ed25519 AAAAAA"
-  # ];
 }
