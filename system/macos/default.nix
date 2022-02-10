@@ -5,7 +5,12 @@
   imports = [
     ../default.nix
     ./users.nix
+    ./pam.nix # pam.enableSudoTouchIdAuth = true;
   ];
+
+  # Currently requiring manual setup
+  # Edge: Teams / Outlook
+  # Rectangle
 
   # https://github.com/LnL7/nix-darwin/tree/master/modules/system/defaults
   system = {
@@ -23,6 +28,20 @@
         FXEnableExtensionChangeWarning = true;
       };
     };
+    # https://github.com/LnL7/nix-darwin/blob/master/modules/system/keyboard.nix
+    keyboard = {
+      enableKeyMapping = true;
+      userKeyMapping = [
+        {
+          HIDKeyboardModifierMappingSrc = 30064771299; # Left command
+          HIDKeyboardModifierMappingDst = 30064771296; # Left control
+        }
+        {
+          HIDKeyboardModifierMappingSrc = 30064771296; # Left control
+          HIDKeyboardModifierMappingDst = 30064771299; # Left command
+        }
+      ];
+    };
   };
 
   # https://github.com/LnL7/nix-darwin/tree/master/modules/environment
@@ -33,6 +52,11 @@
   # https://github.com/LnL7/nix-darwin/tree/master/modules/programs
   programs = {
     zsh.enable = true; # Enable zsh otherwise things break.
+  };
+
+  # https://github.com/LnL7/nix-darwin/tree/master/modules/environment
+  security = {
+    pam.enableSudoTouchIdAuth = true;
   };
 
   # https://github.com/LnL7/nix-darwin/tree/master/modules/services
