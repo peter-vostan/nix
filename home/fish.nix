@@ -2,8 +2,6 @@
   programs = {
     fish = {
       enable = true;
-      # Add setiing for theme variant dark mode
-      # Disable welcome message.
       interactiveShellInit = "set fish_greeting";
     };
 
@@ -23,7 +21,6 @@
     # Enables per-directory run-command files.
     direnv = {
       enable = true;
-      enableFishIntegration = true;
       nix-direnv.enable = true;
     };
   };
