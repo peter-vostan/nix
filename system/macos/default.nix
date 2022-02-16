@@ -24,7 +24,7 @@
     defaults = {
       screencapture = { location = "/tmp"; };
       dock = {
-        autohide = true;
+        autohide = false;
         showhidden = true;
         mru-spaces = false;
       };
