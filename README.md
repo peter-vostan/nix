@@ -80,13 +80,22 @@ mkswap -L swap /dev/vg/swap
 
 ### Install
 
+To enable flakes in NixOS (so that this config can be built), add the following to /etc/nix/configuration.nix
+```sh
+nix = {
+  package = pkgs.nixUnstable;
+  extraOptions = ''experimental-features = nix-command flakes'';
+}
+```
+
+You might also need to copy accross the /etc/nix/hardware-configuration.nix if you don't already have this defined
+
 ```sh
 nixos-install --flake https://github.com/peter-vostan/nix#work
-
 reboot
 ```
 
-Remove root user password once you in gnome
+Remove root user password once you're logged into gnome
 ```sh
 passwd -d root
 ```
