@@ -53,6 +53,9 @@ chsh -s /run/current-system/sw/bin/fish
 https://gist.github.com/martijnvermaat/76f2e24d0239470dd71050358b4d5134
 
 ```sh
+# switch to root
+sudo -i
+
 # Setup partitions
 # Use GPT format
 gdisk /dev/nvme0n1
@@ -80,23 +83,54 @@ mkswap -L swap /dev/vg/swap
 
 ### Install
 
-To enable flakes in NixOS (so that this config can be built), add the following to /etc/nix/configuration.nix
+Mount the partitions
 ```sh
+mount /dev/vg/root /mnt
+mkdir /mnt/boot
+mount /dev/nvme0n1p1 /mnt/boot
+swapon /dev/vg/swap
+```
+
+Install nixos
+```sh
+nixos-generate-config --root /mnt
+
+# Add the following to /mnt/etc/nixos/configuration.nix to enable flakes
 nix = {
   package = pkgs.nixUnstable;
   extraOptions = ''experimental-features = nix-command flakes'';
-}
-```
+};
 
-You might also need to copy accross the /etc/nix/hardware-configuration.nix if you don't already have this defined
+# Add the following to /mnt/etc/nixos/hardware-configuration.nix to configure the encrypted root drive
+boot.initrd.luks.devices = {
+  root = {
+    device = "/dev/nvme0n1p2";
+    preLVM = true;
+    allowDiscards = true;
+  };
+};
 
-```sh
-nixos-install --flake https://github.com/peter-vostan/nix#work
+# And then run
+nixos-install
 reboot
 ```
 
-Remove root user password once you're logged into gnome
+Install config
 ```sh
+nixos-rebuild switch --flake https://github.com/peter-vostan/nix#work
+reboot
+```
+
+User setup
+```sh
+# Login as root
+
+# Set password for the user account
+passwd $USERNAME
+
+# Logout and login as the user
+
+# Remove root user password
 passwd -d root
 ```
 
