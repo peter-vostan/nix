@@ -57,41 +57,44 @@ https://gist.github.com/martijnvermaat/76f2e24d0239470dd71050358b4d5134
 sudo -i
 
 # Setup partitions
-# Use GPT format
 gdisk /dev/nvme0n1
   o
   n [ENTER] [ENTER] 500M ef00
   n [ENTER] [ENTER] [ENTER] 8300
   w
 
-# Label first partition (boot drive) for reference in hardware.nix
+# Label first partition (boot) for reference in hardware.nix
 fatlabel /dev/nvme0n1p1 boot
 
-# Encrypt 2nd partition
+# Encrypt 2nd partition (root)
 cryptsetup luksFormat /dev/nvme0n1p2
 cryptsetup luksOpen /dev/nvme0n1p2 enc-pv
 
+# Create root and swap volumes
 pvcreate /dev/mapper/enc-pv
 vgcreate vg /dev/mapper/enc-pv
 lvcreate -L 8G -n swap vg
 lvcreate -l '100%FREE' -n root vg
 
+# Make boot and root filesystems
 mkfs.fat /dev/nvme0n1p1
 mkfs.ext4 -L root /dev/vg/root
+
+# Make swap area
 mkswap -L swap /dev/vg/swap
+
+# Mount the root and boot partitions
+mount /dev/vg/root /mnt
+mkdir /mnt/boot
+mount /dev/nvme0n1p1 /mnt/boot
+
+# Activate swap area
+swapon /dev/vg/swap
 ```
 
 ### Install
 
-Mount the partitions
-```sh
-mount /dev/vg/root /mnt
-mkdir /mnt/boot
-mount /dev/nvme0n1p1 /mnt/boot
-swapon /dev/vg/swap
-```
-
-Install nixos
+Install nixos with simple working config (this makes it easier to deal with any issues with the custom config as you always have a working config to roll back to)
 ```sh
 nixos-generate-config --root /mnt
 
@@ -110,12 +113,13 @@ boot.initrd.luks.devices = {
   };
 };
 
-# And then run
+# Install nixos config and then reboot into it
 nixos-install
 reboot
 ```
 
-Install config
+Install custom config
+ - Compare /etc/nixos/configuration.nix and /etc/nixos/harware-configuration.nix with the specified /host config files, paying particular attention to the boot and networking sections
 ```sh
 nixos-rebuild switch --flake https://github.com/peter-vostan/nix#work
 reboot
@@ -164,6 +168,16 @@ git config user.email "email@email.com"
 
 ```sh
 cp -r ~/dev/nix/templates/rust-dev/. .
+```
+
+## Nix Repl
+
+```sh
+# Explore nixpkgs
+nix repl '<nixpkgs>'
+
+# repl supports tab-tab autocompletion for all derivations eg.
+nix-repl> python3Packages.future.meta.longDescription
 ```
 
 ## External Displays

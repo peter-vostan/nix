@@ -3,20 +3,41 @@
   # https://github.com/LnL7/nix-darwin
 
   imports = [
-    ../default.nix
     ./pam.nix # pam.enableSudoTouchIdAuth = true;
   ];
 
-  # Should this be added to home-manager instead??
-  # Rectangle should ideally be started automatically
-  nixpkgs.overlays = [ (import ./overlays/apps.nix) ];
-  environment.systemPackages = with pkgs; [
-    Docker
-    Rectangle
-  ];
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [ (import ./overlays/apps.nix) ];
+  };
+
+  nix = {
+    package = pkgs.nixUnstable; # Needed for flake support
+    extraOptions = ''
+      experimental-features = nix-command flakes ca-derivations ca-references
+      # Uses more disk space but speeds up nix-direnv.
+      keep-derivations = true
+      keep-outputs = true
+      auto-optimise-store = true
+    '';
+  };
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+  };
 
   # Currently requiring manual setup
   # MS Edge: for Teams / Outlook PWA (only nice way to use on M1 at present)
+
+  # https://github.com/LnL7/nix-darwin/tree/master/modules/environment
+  environment = {
+    shells = [ pkgs.fish ]; # Add additional allowed shells. Set using `chsh -s /run/current-system/sw/bin/fish`.
+    systemPackages = with pkgs; [
+      Docker
+      Rectangle
+    ];
+  };
 
   # https://github.com/LnL7/nix-darwin/tree/master/modules/system/defaults
   system = {
@@ -50,14 +71,10 @@
     };
   };
 
-  # https://github.com/LnL7/nix-darwin/tree/master/modules/environment
-  environment = {
-    shells = [ pkgs.fish ]; # Add additional allowed shells. Set using `chsh -s /run/current-system/sw/bin/fish`.
-  };
-
   # https://github.com/LnL7/nix-darwin/tree/master/modules/programs
   programs = {
-    zsh.enable = true; # Enable zsh otherwise things break.
+    zsh.enable = true;
+    fish.enable = true;
   };
 
   # https://github.com/LnL7/nix-darwin/tree/master/modules/environment
@@ -70,4 +87,8 @@
     # Enable the Nix build daemon.
     nix-daemon.enable = true;
   };
+
+  cachix = [
+    { name = "nix-community"; sha256 = "00lpx4znr4dd0cc4w4q8fl97bdp7q19z1d3p50hcfxy26jz5g21g"; }
+  ];
 }
