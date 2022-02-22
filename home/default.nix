@@ -8,6 +8,7 @@
     # Default packages
     packages = with pkgs; [
       rnix-lsp # Nix language server
+      jq # sed for json eg. $ echo '{"foo": 10}' | jq .foo
     ];
     # Alias apps to `~/Applcations` for SpotLight indexing.
     # TODO: Test if this breaks things for NixOS and can only be used by nixDarwin
