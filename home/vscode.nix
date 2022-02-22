@@ -40,13 +40,13 @@
 
         # Telemetry
         "githubPullRequests.telemetry.enabled" = false;
-        "telemetry.enableCrashReporter" = false;
-        "telemetry.enableTelemetry" = false;
+        "telemetry.telemetryLevel" = "off";
 
         # Updates
         "update.mode" = "none";
 
         # Git
+        "git.autofetch" = true;
         "gitlens.codeLens.enabled" = false;
         "gitlens.currentLine.enabled" = false;
 
