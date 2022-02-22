@@ -17,12 +17,7 @@ The initial inspired / copied from
 
 Install Nix unstable
 ```sh
-curl -s https://api.github.com/repos/numtide/nix-unstable-installer/releases/latest |
-   grep 'browser_download_url' |
-   grep '/install' |
-   cut -d '"' -f 4 |
-   xargs curl --silent --location |
-   sh -s -- --daemon --darwin-use-unencrypted-nix-store-volume
+sh <(curl -L https://nixos.org/nix/install)
 ```
 
 Install nix-darwin
@@ -33,7 +28,7 @@ nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer 
 
 Bootstrap build
 ```sh
-nix build ".#darwinConfigurations.work-mac.system" --extra-experimental-features nix-command --extra-experimental-features flakes
+nix build ".#darwinConfigurations.work-mac.system" --extra-experimental-features 'nix-command flakes'
 ./result/sw/bin/darwin-rebuild switch --flake .#work-mac
 
 # The followig might need to be run to resolve errors with these existing files
@@ -100,7 +95,7 @@ nixos-generate-config --root /mnt
 
 # Add the following to /mnt/etc/nixos/configuration.nix to enable flakes
 nix = {
-  package = pkgs.nixUnstable;
+  package = pkgs.nix_2_4;
   extraOptions = ''experimental-features = nix-command flakes'';
 };
 

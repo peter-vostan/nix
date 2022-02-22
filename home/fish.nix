@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs = {
     fish = {
       enable = true;
@@ -8,13 +8,8 @@
     # Enable the `starship` prompt.
     starship = {
       enable = true;
-      enableFishIntegration = true;
       settings = {
         battery.disabled = true;
-        nix_shell = {
-          symbol = "⛄ ";
-          format = ''via [$symbol$state( $name)]($style) '';
-        };
       };
     };
 
@@ -22,6 +17,15 @@
     direnv = {
       enable = true;
       nix-direnv.enable = true;
+      nix-direnv.enableFlakes = true;
     };
   };
+
+  # Install powerline font for starship.
+  home.packages = with pkgs; [
+    # Fira Code
+    (nerdfonts.override {
+      fonts = [ "FiraCode" ];
+    })
+  ];
 }

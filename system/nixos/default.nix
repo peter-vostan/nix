@@ -16,7 +16,7 @@
 
   nix = {
     autoOptimiseStore = true;
-    package = pkgs.nixUnstable; # Needed for flake support
+    package = pkgs.nix_2_4; # Needed for flake support
     extraOptions = ''
       experimental-features = nix-command flakes
       # Uses more disk space but speeds up nix-direnv.

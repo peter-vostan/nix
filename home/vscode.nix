@@ -1,8 +1,8 @@
 { pkgs, lib, ... }: {
   programs.vscode = {
     enable = true;
-    extensions = with pkgs.vscode-extensions; [
-      # Prefer the packaged version for extensions which require additional binaries.
+    package = pkgs.unstable.vscode; # use unstable version so that it's kept up to date
+    extensions = with pkgs.unstable.vscode-extensions; [
       vadimcn.vscode-lldb
       github.github-vscode-theme
       github.vscode-pull-request-github

@@ -2,26 +2,39 @@
   description = "peter's nix configs";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-21.11";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    cachix.url = "github:jonascarpay/declarative-cachix";
     macos = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-21.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    cachix.url = "github:jonascarpay/declarative-cachix";
   };
 
-  outputs = { self, nixpkgs, macos, home, cachix, ... }:
+  outputs = { self, nixpkgs, unstable, cachix, macos, home, ... }:
+    let
+      unstableOverlay = final: prev: {
+        unstable = import unstable {
+          system = prev.system;
+          config.allowUnfree = true;
+        };
+      };
+      overlays.nixpkgs.overlays = [ unstableOverlay ];
+      commonModules = [
+        overlays
+        cachix.nixosModules.declarative-cachix
+      ];
+    in
     {
       nixosConfigurations.work-dell = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [
+        modules = commonModules ++ [
           ./hosts/work-dell
           ./system/nixos
-          cachix.nixosModules.declarative-cachix
           home.nixosModules.home-manager
           {
             home-manager.users.peter = {
@@ -51,9 +64,8 @@
 
       darwinConfigurations.work-mac = macos.lib.darwinSystem {
         system = "aarch64-darwin";
-        modules = [
+        modules = commonModules ++ [
           ./system/macos
-          cachix.nixosModules.declarative-cachix
           home.darwinModules.home-manager
           {
             home-manager.users.petervostan = {

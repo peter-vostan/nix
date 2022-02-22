@@ -12,9 +12,9 @@
   };
 
   nix = {
-    package = pkgs.nixUnstable; # Needed for flake support
+    package = pkgs.nix_2_4; # Needed for flake support
     extraOptions = ''
-      experimental-features = nix-command flakes ca-derivations ca-references
+      experimental-features = nix-command flakes
       # Uses more disk space but speeds up nix-direnv.
       keep-derivations = true
       keep-outputs = true
