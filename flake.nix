@@ -41,6 +41,7 @@
               imports = [
                 ./home/default.nix
                 ./home/fish.nix
+                ./home/starship.nix
                 ./home/git.nix
                 ./home/ssh.nix
                 ./home/vscode.nix
@@ -72,6 +73,7 @@
               imports = [
                 ./home/default.nix
                 ./home/fish.nix
+                ./home/starship.nix
                 ./home/git.nix
                 ./home/ssh.nix
                 ./home/vscode.nix

@@ -39,6 +39,17 @@ sudo rm /etc/shells
 Set default shell
 ```sh
 chsh -s /run/current-system/sw/bin/fish
+
+# Manually set (replace with script at some point)
+#   Terminal -> Preferences -> Profiles -> Default -> 
+#     Font -> Change -> FiraCode Nerd Font Mono -> Regular -> 12
+#     Cursor -> Vertical Bar
+#     Cursor -> Blink cursor
+```
+
+Install XCode
+```sh
+xcode-select --install
 ```
 
 ## nixOS

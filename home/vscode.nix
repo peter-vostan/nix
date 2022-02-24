@@ -22,6 +22,8 @@
         "editor.autoClosingBrackets" = "always";
         "editor.cursorBlinking" = "smooth";
         "editor.cursorSmoothCaretAnimation" = true;
+        "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
+        "editor.fontLigatures" = true;
         "editor.formatOnPaste" = true;
         "editor.formatOnSave" = true;
         "editor.formatOnType" = true;
@@ -34,6 +36,8 @@
         "terminal.integrated.fontSize" = 12;
         "terminal.integrated.allowChords" = false;
         "terminal.integrated.gpuAcceleration" = "on";
+        "terminal.integrated.cursorStyle" = "line";
+        "terminal.integrated.cursorBlinking" = true;
 
         # Files
         "files.autoSave" = "afterDelay";
