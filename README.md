@@ -36,17 +36,6 @@ sudo rm /etc/nix/nix.conf
 sudo rm /etc/shells
 ```
 
-Set default shell
-```sh
-chsh -s /run/current-system/sw/bin/fish
-
-# Manually set (replace with script at some point)
-#   Terminal -> Preferences -> Profiles -> Default -> 
-#     Font -> Change -> FiraCode Nerd Font Mono -> Regular -> 12
-#     Cursor -> Vertical Bar
-#     Cursor -> Blink cursor
-```
-
 Install XCode
 ```sh
 xcode-select --install
@@ -190,7 +179,7 @@ nix-repl> python3Packages.future.meta.longDescription
 
 ```sh
 # To see what displays are connected
-xrandr 
+xrandr
 
 # Example for the Fugro meeting rooms
 xrandr --output DP-3 --mode 1920x1080 --rate 60

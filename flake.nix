@@ -39,7 +39,7 @@
           {
             home-manager.users.peter = {
               imports = [
-                ./home/default.nix
+                ./home
                 ./home/fish.nix
                 ./home/starship.nix
                 ./home/git.nix
@@ -48,7 +48,7 @@
               ];
               programs.git.userName = "Peter Vostan";
               # Removed from global config to force it to be set explicitly in each repo (to separate work and personal)
-              # programs.git.userEmail = ""; 
+              # programs.git.userEmail = "";
             };
 
             users.users.peter = {
@@ -71,16 +71,22 @@
           {
             home-manager.users.petervostan = {
               imports = [
-                ./home/default.nix
+                ./home
+                ./home/macos
                 ./home/fish.nix
                 ./home/starship.nix
                 ./home/git.nix
                 ./home/ssh.nix
                 ./home/vscode.nix
               ];
+              macos = {
+                manageAppDir = true; # Alias applications to ~/Applications
+                shell = "/etc/profiles/per-user/petervostan/bin/fish"; # Set the user shell to fish
+                terminal.font = "FiraCode Nerd Font"; # Set the macOS Terminal.app font to Fira Code
+              };
               programs.git.userName = "Peter Vostan";
               # Removed from global config to force it to be set explicitly in each repo (to separate work and personal)
-              # programs.git.userEmail = ""; 
+              # programs.git.userEmail = "";
             };
 
             users.users.petervostan = {

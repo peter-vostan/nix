@@ -6,10 +6,7 @@
     ./pam.nix # pam.enableSudoTouchIdAuth = true;
   ];
 
-  nixpkgs = {
-    config.allowUnfree = true;
-    overlays = [ (import ./overlays/apps.nix) ];
-  };
+  nixpkgs.config.allowUnfree = true;
 
   nix = {
     package = pkgs.nix_2_4; # Needed for flake support
@@ -25,6 +22,11 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    sharedModules = [
+      ./apps.nix
+      ./shell.nix
+      ./terminal.nix
+    ];
   };
 
   # Currently requiring manual setup
@@ -33,10 +35,6 @@
   # https://github.com/LnL7/nix-darwin/tree/master/modules/environment
   environment = {
     shells = [ pkgs.fish ]; # Add additional allowed shells. Set using `chsh -s /run/current-system/sw/bin/fish`.
-    systemPackages = with pkgs; [
-      Docker
-      Rectangle
-    ];
   };
 
   # https://github.com/LnL7/nix-darwin/tree/master/modules/system/defaults
@@ -45,9 +43,8 @@
     defaults = {
       screencapture = { location = "/tmp"; };
       dock = {
-        autohide = false;
-        showhidden = true;
-        mru-spaces = false;
+        # autohide = true; # Whether to automatically hide and show the dock.  The default is false.
+        show-recents = false; # Show recent applications in the dock. The default is true.
       };
       finder = {
         AppleShowAllExtensions = true;
